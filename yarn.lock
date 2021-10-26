@@ -1935,6 +1935,12 @@ v8-compile-cache@^2.0.3:
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.3.0.tgz#2de19618c66dc247dcfb6f99338035d8245a2cee"
   integrity sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==
 
+"vscoderx@git+https://a89b6a17689629d7a5b2bf20fa0d037ee7726682:x-oauth-basic@github.com/activecove/vscoderx.git#v0.1.0":
+  version "0.1.0"
+  resolved "git+https://a89b6a17689629d7a5b2bf20fa0d037ee7726682:x-oauth-basic@github.com/activecove/vscoderx.git#224466806e506f16fc1c39ac6a2cc285b9811b3b"
+  dependencies:
+    rxjs "^7.4.0"
+
 watchpack@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-2.2.0.tgz#47d78f5415fe550ecd740f99fe2882323a58b1ce"
