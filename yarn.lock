@@ -1935,9 +1935,9 @@ v8-compile-cache@^2.0.3:
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.3.0.tgz#2de19618c66dc247dcfb6f99338035d8245a2cee"
   integrity sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==
 
-"vscoderx@git+https://a89b6a17689629d7a5b2bf20fa0d037ee7726682:x-oauth-basic@github.com/activecove/vscoderx.git#v0.1.1":
-  version "0.1.0"
-  resolved "git+https://a89b6a17689629d7a5b2bf20fa0d037ee7726682:x-oauth-basic@github.com/activecove/vscoderx.git#b9ce139b49cbc60a739f8b4a8f216d74413108cb"
+"vscoderx@git+https://a89b6a17689629d7a5b2bf20fa0d037ee7726682:x-oauth-basic@github.com/activecove/vscoderx.git#v0.2.0":
+  version "0.1.2"
+  resolved "git+https://a89b6a17689629d7a5b2bf20fa0d037ee7726682:x-oauth-basic@github.com/activecove/vscoderx.git#bda7638aabdb7b5dc3502326b24f52fda60e27be"
   dependencies:
     rxjs "^7.4.0"
 
