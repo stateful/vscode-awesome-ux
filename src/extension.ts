@@ -4,6 +4,7 @@ import * as vscode from "vscode";
 import { of, Subject, timer } from "rxjs";
 import { map, take } from "rxjs/operators";
 import * as Vrx from "vscoderx";
+import { SyncPayload } from "./payload";
 
 const webviewOptions = {
   enableScripts: true,
@@ -20,19 +21,21 @@ export function activate(context: vscode.ExtensionContext) {
   const baseAppUri = panel.webview.asWebviewUri(
     vscode.Uri.file(path.join(context.extensionPath, "/dist/webview/"))
   );
-  panel.webview.html = getHtml(context, baseAppUri.toString(), "column-one");
+  panel.webview.html = getHtml(context, baseAppUri.toString(), "column1");
 
   const panelProviders: Vrx.WebviewProvider[] = [
-    PanelViewProvider.register(context, "panel-one"),
-    PanelViewProvider.register(context, "panel-two"),
+    PanelViewProvider.register(context, "panel1"),
+    PanelViewProvider.register(context, "panel2"),
     Vrx.wrapPanel(panel),
   ];
 
   // Subscribe to posts
-  Vrx.forWebviews("vscoderx", {}, panelProviders).subscribe((bus) => {
+  Vrx.forWebviews<SyncPayload>("vscoderx", {}, panelProviders).subscribe((bus) => {
     // Subscribe to events
-    bus.on("panel", (msg) => console.log(`Listen to onPanel: ${msg}`));
-    // vrx.onAll((msg) => console.log(`Listen to all: ${JSON.stringify(msg)}`));
+    bus.listen("onPanel1", (msg) => console.log(`Listen to onPanel1: ${msg}`));
+    bus.listen("onPanel1", (msg) => console.log(`Listen to onPanel2: ${msg}`));
+    bus.listen("onColumn1", (msg) => console.log(`Listen to onColumn1: ${msg}`));
+    // bus.onAll((msg) => console.log(`Listen to all: ${JSON.stringify(msg)}`));
 
     // Publish posts
     const countdown = 6;
@@ -41,8 +44,8 @@ export function activate(context: vscode.ExtensionContext) {
         take(countdown),
         map((i) => ({ onCountdown: countdown - 1 - i }))
       )
-      .subscribe((msg) => {
-        bus.broadcast(msg);
+      .subscribe((payload) => {
+        bus.broadcast(payload);
       });
 
     context.subscriptions.push(
