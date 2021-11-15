@@ -23,13 +23,13 @@
 		"views": {
 			"explorer": [
 				{
-					"id": "panel-one",
+					"id": "panel1",
 					"name": "VRX 1",
 					"type": "webview",
 					"visibility": "visible"
 				},
 				{
-					"id": "panel-two",
+					"id": "panel2",
 					"name": "VRX 2",
 					"type": "webview",
 					"visibility": "visible"
