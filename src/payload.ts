@@ -14,6 +14,7 @@ export interface TransientState {
   counter?: number;
 }
 
+// https://stackoverflow.com/questions/49401866/all-possible-keys-of-an-union-type
 // figure out if we could use union type
 export type SyncState = CommandEvent | PanelEvent | CountdownEvent | TransientState;
 
