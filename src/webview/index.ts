@@ -1,7 +1,5 @@
-import { fromEvent, merge } from "rxjs";
-import { map, pluck } from "rxjs/operators";
-import * as Vrx from "vscoderx";
-import { PanelEvent, SyncPayload, SyncState } from "../payload";
+import Channel from "vscoderx/webviews";
+import { SyncPayload } from "../payload";
 
 declare const acquireVsCodeApi: Function;
 
@@ -39,7 +37,8 @@ function onload(event: Event) {
 
   if (vscode && eventEmitter && oneUpper) {
     const label = eventEmitter.getAttribute("value");
-    const client = Vrx.forDOM<SyncPayload>("vscoderx", transient, window, vscode);
+    const ch = new Channel<SyncPayload>('vscoderx', transient);
+    const client = ch.attach(vscode);
     client.listen("onPanel1", (panel1) => onMsg(EVENTS)(`onPanel1: ${panel1}`));
     client.listen("onPanel2", (panel2) => onMsg(EVENTS)(`onPanel2: ${panel2}`));
     client.listen("onColumn1", (column1) => onMsg(EVENTS)(`onColumn1: ${column1}`));
