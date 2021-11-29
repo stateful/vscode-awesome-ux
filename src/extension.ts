@@ -3,8 +3,9 @@ import path = require("path");
 import vscode from "vscode";
 import { Subject, timer } from "rxjs";
 import { map, take } from "rxjs/operators";
-import Channel from "vscoderx/webviews";
-import type { WebviewProvider } from "vscoderx";
+import Channel from "tangle/webviews";
+import type { WebviewProvider } from "tangle";
+
 import { SyncPayload } from "./payload";
 
 const webviewOptions = {
@@ -24,7 +25,7 @@ export async function activate(context: vscode.ExtensionContext) {
   );
   panel.webview.html = getHtml(context, baseAppUri.toString(), "column1");
 
-  const ch = new Channel<SyncPayload>('vscoderx', {});
+  const ch = new Channel<SyncPayload>('tangle', {});
   const bus = await ch.registerPromise([
     PanelViewProvider.register(context, "panel1"),
     PanelViewProvider.register(context, "panel2"),
@@ -35,7 +36,6 @@ export async function activate(context: vscode.ExtensionContext) {
   bus.listen('onPanel1', (msg) => console.log(`Listen to onPanel1: ${msg}`));
   bus.listen('onPanel1', (msg) => console.log(`Listen to onPanel2: ${msg}`));
   bus.listen('onColumn1', (msg) => console.log(`Listen to onColumn1: ${msg}`));
-  // bus.onAll((msg) => console.log(`Listen to all: ${JSON.stringify(msg)}`));
 
   // Publish posts
   const countdown = 6;
@@ -49,8 +49,8 @@ export async function activate(context: vscode.ExtensionContext) {
     });
 
   context.subscriptions.push(
-    vscode.commands.registerCommand("vscoderx.emit", () => {
-      bus.broadcast({ onCommand: "vscoderx.emit" });
+    vscode.commands.registerCommand("tangle.emit", () => {
+      bus.broadcast({ onCommand: "tangle.emit" });
     })
   );
 }

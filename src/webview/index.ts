@@ -1,4 +1,4 @@
-import Channel from "vscoderx/webviews";
+import Channel from "tangle/webviews";
 import { SyncPayload } from "../payload";
 
 declare const acquireVsCodeApi: Function;
@@ -37,7 +37,7 @@ function onload(event: Event) {
 
   if (vscode && eventEmitter && oneUpper) {
     const label = eventEmitter.getAttribute("value");
-    const ch = new Channel<SyncPayload>('vscoderx', transient);
+    const ch = new Channel<SyncPayload>('tangle', transient);
     const client = ch.attach(vscode);
     client.listen("onPanel1", (panel1) => onMsg(EVENTS)(`onPanel1: ${panel1}`));
     client.listen("onPanel2", (panel2) => onMsg(EVENTS)(`onPanel2: ${panel2}`));
