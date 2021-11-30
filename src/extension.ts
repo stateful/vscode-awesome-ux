@@ -1,4 +1,4 @@
-import vscode, { Webview } from "vscode";
+import vscode from "vscode";
 import Channel from 'tangle/webviews';
 
 import TodoAppPanel from "./webview/todoApp";
