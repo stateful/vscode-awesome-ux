@@ -1,9 +1,11 @@
-import { readFileSync } from "fs";
+import fs from "fs";
 import path = require("path");
-import * as vscode from "vscode";
-import { of, Subject, timer } from "rxjs";
+import vscode from "vscode";
+import { Subject, timer } from "rxjs";
 import { map, take } from "rxjs/operators";
-import * as Vrx from "vscoderx";
+import Channel from "tangle/webviews";
+import type { WebviewProvider } from "tangle";
+
 import { SyncPayload } from "./payload";
 
 const webviewOptions = {
@@ -11,7 +13,7 @@ const webviewOptions = {
   retainContextWhenHidden: true,
 };
 
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
   const panel = vscode.window.createWebviewPanel(
     "column-one",
     "VRX column-one",
@@ -23,46 +25,43 @@ export function activate(context: vscode.ExtensionContext) {
   );
   panel.webview.html = getHtml(context, baseAppUri.toString(), "column1");
 
-  const panelProviders: Vrx.WebviewProvider[] = [
+  const ch = new Channel<SyncPayload>('tangle', {});
+  const bus = await ch.registerPromise([
     PanelViewProvider.register(context, "panel1"),
     PanelViewProvider.register(context, "panel2"),
-    Vrx.wrapPanel(panel),
-  ];
+    panel,
+  ]);
 
-  // Subscribe to posts
-  Vrx.forWebviews<SyncPayload>("vscoderx", {}, panelProviders).subscribe((bus) => {
-    // Subscribe to events
-    bus.listen("onPanel1", (msg) => console.log(`Listen to onPanel1: ${msg}`));
-    bus.listen("onPanel1", (msg) => console.log(`Listen to onPanel2: ${msg}`));
-    bus.listen("onColumn1", (msg) => console.log(`Listen to onColumn1: ${msg}`));
-    // bus.onAll((msg) => console.log(`Listen to all: ${JSON.stringify(msg)}`));
+  // Subscribe to events
+  bus.listen('onPanel1', (msg) => console.log(`Listen to onPanel1: ${msg}`));
+  bus.listen('onPanel1', (msg) => console.log(`Listen to onPanel2: ${msg}`));
+  bus.listen('onColumn1', (msg) => console.log(`Listen to onColumn1: ${msg}`));
 
-    // Publish posts
-    const countdown = 6;
-    timer(2000, 8000)
-      .pipe(
-        take(countdown),
-        map((i) => ({ onCountdown: countdown - 1 - i }))
-      )
-      .subscribe((payload) => {
-        bus.broadcast(payload);
-      });
+  // Publish posts
+  const countdown = 6;
+  timer(2000, 8000)
+    .pipe(
+      take(countdown),
+      map((i) => ({ onCountdown: countdown - 1 - i }))
+    )
+    .subscribe((payload) => {
+      bus.broadcast(payload);
+    });
 
-    context.subscriptions.push(
-      vscode.commands.registerCommand("vscoderx.emit", () => {
-        bus.broadcast({ onCommand: "vscoderx.emit" });
-      })
-    );
-  });
+  context.subscriptions.push(
+    vscode.commands.registerCommand("tangle.emit", () => {
+      bus.broadcast({ onCommand: "tangle.emit" });
+    })
+  );
 }
 
 function getHtml(context: vscode.ExtensionContext, baseAppUri: string, identifier: string) {
   const re = /app-ext-identifier/g;
-  const html = readFileSync(`${context.extensionPath}/src/webview/index.html`).toString("utf-8");
+  const html = fs.readFileSync(`${context.extensionPath}/src/webview/index.html`).toString("utf-8");
   return html.replace("app-ext-path", baseAppUri).replace(re, identifier);
 }
 
-export class PanelViewProvider implements vscode.WebviewViewProvider, Vrx.WebviewProvider {
+export class PanelViewProvider implements vscode.WebviewViewProvider, WebviewProvider {
   public view?: vscode.WebviewView;
   private _webview = new Subject<vscode.Webview>();
 

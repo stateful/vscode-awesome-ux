@@ -16,7 +16,7 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "vscoderx.emit",
+				"command": "tangle.emit",
 				"title": "VS Code RX Emit"
 			}
 		],
@@ -67,6 +67,6 @@
 	},
 	"dependencies": {
 		"rxjs": "^7.4.0",
-		"vscoderx": "git+https://a89b6a17689629d7a5b2bf20fa0d037ee7726682:x-oauth-basic@github.com/activecove/vscoderx.git#v0.2.0"
+		"tangle": "v1.0.1-beta.1"
 	}
 }
