@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= it.title %></title>
+    <meta
+        http-equiv="Content-Security-Policy"
+        content="default-src 'none'; img-src <%= it.cspSource %>; script-src <%= it.cspSource %>; nonce-<%= it.nonce %>; style-src 'unsafe-inline' <%= it.cspSource %>; style-src-elem 'unsafe-inline' <%= it.cspSource %>; font-src <%= it.cspSource %>;"
+    />
+
+    <% it.stylesheets.forEach((stylesheet) => { %>
+        <link
+            rel="stylesheet"
+            href="<%= stylesheet.href %>"
+            nonce="<%= it.nonce %>"
+            id="<%= stylesheet.id %>"
+        />
+    <% }) %>
+    <% it.scripts.forEach((script) => { %>
+        <script
+            src="<%= script.src %>"
+            nonce="<%= it.nonce %>"
+            type="module"
+            <%= script.defer ? 'defer' : '' %>
+        ></script>
+    <% }) %>
+</head>
+<body>
+    <app-settings></app-settings>
+    <vscode-divider></vscode-divider>
+    <app-events><i class="codicon codicon-bell"></i></app-events>
+</body>
+</html>
