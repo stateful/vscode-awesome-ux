@@ -1,32 +1,27 @@
-import path from "path";
-import vscode from "vscode";
-import { timer } from "rxjs";
-import { map, take } from "rxjs/operators";
+import vscode, { Webview } from "vscode";
 import Channel from 'tangle/webviews';
-import type { WebviewProvider } from "tangle";
 
 import TodoAppPanel from "./webview/todoApp";
 import { getHtmlForWebview } from './utils';
 import { webviewOptions } from './constants';
 
 export async function activate(context: vscode.ExtensionContext) {
-    const panel = vscode.window.createWebviewPanel(
+    const examplePanel1 = TodoAppPanel.register(context, 'panel1');
+    const examplePanel2 = TodoAppPanel.register(context, 'panel2');
+    const webviewPanel = vscode.window.createWebviewPanel(
         'column-one',
         'Example WebView Panel',
         vscode.ViewColumn.One,
         webviewOptions
     );
-    panel.webview.html = await getHtmlForWebview(panel.webview, context.extensionUri);
-
-    const panelProviders: WebviewProvider[] = [
-        TodoAppPanel.register(context, "panel1"),
-        TodoAppPanel.register(context, "panel2"),
-        // @ts-expect-error
-        panel
-    ];
+    webviewPanel.webview.html = await getHtmlForWebview(webviewPanel.webview, context.extensionUri);
 
     const ch = new Channel('vscode-awesome-ux');
-    await ch.registerPromise(panelProviders);
+    await ch.registerPromise([
+        examplePanel1.webview,
+        examplePanel2.webview,
+        webviewPanel.webview
+    ]);
 }
 
 // this method is called when your extension is deactivated

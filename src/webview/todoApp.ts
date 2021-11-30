@@ -1,18 +1,16 @@
 import {
     window,
-    Uri,
     Webview,
     WebviewView,
     WebviewViewProvider,
     ExtensionContext
 } from 'vscode';
 import { Subject } from "rxjs";
-import type { WebviewProvider } from "tangle";
 
 import { webviewOptions } from '../constants';
 import { getHtmlForWebview } from '../utils';
 
-export default class TodoAppPanel implements WebviewViewProvider, WebviewProvider {
+export default class TodoAppPanel implements WebviewViewProvider {
     private _webview = new Subject<Webview>();
 
     constructor(
