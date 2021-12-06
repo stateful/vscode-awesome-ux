@@ -42,7 +42,9 @@
 		"build": "run-s clean compile",
 		"clean": "rimraf out",
 		"compile": "rollup -c ./rollup.config.mjs",
-		"lint": "eslint src --ext ts",
+		"test": "run-s test:*",
+    "test:lint": "eslint src --ext ts",
+    "test:unit": "node ./out/tests/runTest.js",
 		"watch": "npm run clean && npm run compile -- --watch"
 	},
 	"devDependencies": {
