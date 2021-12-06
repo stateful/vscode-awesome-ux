@@ -44,12 +44,12 @@ export default class ExtensionController implements vscode.Disposable {
      */
     deactivate(): void {
         this.dispose();
-        console.log('Extension deactivated');
+        console.log('[ExtensionController] extension deactivated');
     }
 
     dispose () {
         this._disposables.forEach((disposable) => disposable.dispose());
-        console.log('Extension disposed');
+        console.log(`[ExtensionController] ${this._disposables.length} items disposed`);
     }
 
     /**

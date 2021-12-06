@@ -12,8 +12,9 @@ suite('Extension Test Suite', function () {
     test('should shut down extension', async () => {
         let disposeCnt = 0;
         const controller = await getController();
-        controller!['_webviewPanel'].onDidDispose(() => ++disposeCnt)
+        const cntListener = () => ++disposeCnt;
+        controller!['_webviewPanel'].onDidDispose(cntListener);
         await deactivate();
-        expect(disposeCnt).toBe(1)
+        expect(disposeCnt).toBe(1);
     })
 });
