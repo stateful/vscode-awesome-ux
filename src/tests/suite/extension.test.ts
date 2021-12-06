@@ -1,8 +1,19 @@
-import assert from 'assert';
+import expect from 'expect';
+import { getController, deactivate } from '../../extension';
 
 suite('Extension Test Suite', function () {
-    test('Sample test', () => {
-        assert.strictEqual(-1, [1, 2, 3].indexOf(5));
-        assert.strictEqual(1, [1, 2, 3].indexOf(0));
+    test('Sample test', async () => {
+        const controller = await getController();
+        expect(controller!['_examplePanel1']['_webview'].closed).toBe(false)
+        expect(controller!['_examplePanel2']['_webview'].closed).toBe(false)
+        expect(controller!['_webviewPanel'].active).toBe(true)
     });
+
+    test('should shut down extension', async () => {
+        let disposeCnt = 0;
+        const controller = await getController();
+        controller!['_webviewPanel'].onDidDispose(() => ++disposeCnt)
+        await deactivate();
+        expect(disposeCnt).toBe(1)
+    })
 });

@@ -1,5 +1,4 @@
 import {
-    window,
     Webview,
     WebviewView,
     WebviewViewProvider,
@@ -25,14 +24,6 @@ export default class TodoAppPanel implements WebviewViewProvider {
             localResourceRoots: [this._context.extensionUri],
         };
         this._webview.next(webviewView.webview);
-    }
-
-    public static register(context: ExtensionContext, identifier: string) {
-        const panelProvider = new TodoAppPanel(context, identifier);
-        context.subscriptions.push(
-            window.registerWebviewViewProvider(identifier, panelProvider)
-        );
-        return panelProvider;
     }
 
     public get webview() {

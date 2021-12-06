@@ -5,11 +5,12 @@ import Channel from 'tangle/webviews';
 
 import TodoAppPanel from "../webview/todoApp";
 import { getHtmlForWebview } from '../utils';
-import { webviewOptions, tangleChannelName, cmdRingBell } from '../constants';
+import { webviewOptions, tangleChannelName, cmdRingBell, cmdGetController } from '../constants';
 
 
-export default class MainController implements vscode.Disposable {
+export default class ExtensionController implements vscode.Disposable {
     private _event: EventEmitter = new EventEmitter();
+    private _disposables: vscode.Disposable[] = [];
 
     // extension webviews
     private _examplePanel1: TodoAppPanel;
@@ -23,21 +24,32 @@ export default class MainController implements vscode.Disposable {
     constructor(private _context: vscode.ExtensionContext) {
         this._context.subscriptions.push(this);
 
-        this._examplePanel1 = TodoAppPanel.register(this._context, 'panel1');
-        this._examplePanel2 = TodoAppPanel.register(this._context, 'panel2');
+        this._examplePanel1 = new TodoAppPanel(this._context, 'panel1')
+        this._disposables.push(vscode.window.registerWebviewViewProvider('panel1', this._examplePanel1));
+
+        this._examplePanel2 = new TodoAppPanel(this._context, 'panel2')
+        this._disposables.push(vscode.window.registerWebviewViewProvider('panel2', this._examplePanel2));
+
         this._webviewPanel = vscode.window.createWebviewPanel(
             'column-one',
             'Example WebView Panel',
             vscode.ViewColumn.One,
             webviewOptions
         );
+        this._disposables.push(this._webviewPanel)
     }
 
     /**
-     * Disposes the controller
+     * Deactivate the controller
      */
-    dispose(): void {
-        this.deactivate();
+    deactivate(): void {
+        this.dispose();
+        console.log('Extension deactivated');
+    }
+
+    dispose () {
+        this._disposables.forEach((disposable) => disposable.dispose());
+        console.log('Extension disposed');
     }
 
     /**
@@ -59,24 +71,17 @@ export default class MainController implements vscode.Disposable {
         /**
          * register extension commands
          */
-        this._registerCommandWithArgs(cmdRingBell);
-        this._event.on(cmdRingBell, () => bus.emit('ring', null))
-    }
-
-    /**
-     * Deactivates the extension
-     */
-    public async deactivate(): Promise<void> {
-        console.log('extension de-activated.');
+        this._registerCommand(cmdRingBell, () => bus.emit('ring', null));
+        this._registerCommand(cmdGetController, () => this)
     }
 
     /**
      * Helper method to setup command registrations with arguments
      */
-    private _registerCommandWithArgs(command: string): void {
-        const self = this;
+    private _registerCommand(command: string, listener: (...args: any[]) => void): void {
         this._context.subscriptions.push(vscode.commands.registerCommand(command, (args: any) => {
-            self._event.emit(command, args);
+            this._event.emit(cmdRingBell, args);
+            return listener(args);
         }));
     }
 }
