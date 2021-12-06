@@ -6,10 +6,11 @@ import {
     customElement
 } from 'lit-element';
 import Channel from 'tangle/webviews';
+import { Checkbox } from '@vscode/webview-ui-toolkit';
 import type { Client } from 'tangle';
 
 import { vscode } from './constants';
-import { Checkbox } from '@vscode/webview-ui-toolkit';
+import { tangleChannelName } from '../constants';
 
 interface State {
     syntaxEnabled: boolean
@@ -43,7 +44,7 @@ export class Settings extends LitElement {
     constructor () {
         super();
 
-        const channel = new Channel<State>('vscode-awesome-ux', this._state);
+        const channel = new Channel<State>(tangleChannelName, this._state);
         this._client = channel.attach(vscode);
         this._client.listen('syntaxEnabled', (state) => (this._setState('syntaxEnabled', state)));
         this._client.listen('debuggerEnabled', (state) => (this._setState('debuggerEnabled', state)));

@@ -18,7 +18,7 @@
 		"commands": [
 			{
 				"command": "tangle.emit",
-				"title": "VS Code RX Emit"
+				"title": "Ring Bell!"
 			}
 		],
 		"views": {
