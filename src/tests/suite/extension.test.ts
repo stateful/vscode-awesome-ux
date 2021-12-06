@@ -4,9 +4,9 @@ import { getController, deactivate } from '../../extension';
 suite('Extension Test Suite', function () {
     test('Sample test', async () => {
         const controller = await getController();
-        expect(controller!['_examplePanel1']['_webview'].closed).toBe(false)
-        expect(controller!['_examplePanel2']['_webview'].closed).toBe(false)
-        expect(controller!['_webviewPanel'].active).toBe(true)
+        expect(controller!['_examplePanel1']['_webview'].closed).toBe(false);
+        expect(controller!['_examplePanel2']['_webview'].closed).toBe(false);
+        expect(controller!['_webviewPanel'].active).toBe(true);
     });
 
     test('should shut down extension', async () => {
@@ -16,5 +16,5 @@ suite('Extension Test Suite', function () {
         controller!['_webviewPanel'].onDidDispose(cntListener);
         await deactivate();
         expect(disposeCnt).toBe(1);
-    })
+    });
 });
