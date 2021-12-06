@@ -17,7 +17,7 @@ async function main() {
         extensionDevelopmentPath,
         extensionTestsPath,
         launchArgs: ['--disable-extensions'],
-        version: 'insiders'
+        version: process.env.CI ? 'stable' : 'insiders'
     });
   } catch (err) {
     console.error(err);
