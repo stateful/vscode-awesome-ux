@@ -1,5 +1,5 @@
 import vscode from "vscode";
-import { EventEmitter } from 'events'
+import { EventEmitter } from 'events';
 
 import Channel from 'tangle/webviews';
 
@@ -24,10 +24,10 @@ export default class ExtensionController implements vscode.Disposable {
     constructor(private _context: vscode.ExtensionContext) {
         this._context.subscriptions.push(this);
 
-        this._examplePanel1 = new TodoAppPanel(this._context, 'panel1')
+        this._examplePanel1 = new TodoAppPanel(this._context, 'panel1');
         this._disposables.push(vscode.window.registerWebviewViewProvider('panel1', this._examplePanel1));
 
-        this._examplePanel2 = new TodoAppPanel(this._context, 'panel2')
+        this._examplePanel2 = new TodoAppPanel(this._context, 'panel2');
         this._disposables.push(vscode.window.registerWebviewViewProvider('panel2', this._examplePanel2));
 
         this._webviewPanel = vscode.window.createWebviewPanel(
@@ -36,7 +36,7 @@ export default class ExtensionController implements vscode.Disposable {
             vscode.ViewColumn.One,
             webviewOptions
         );
-        this._disposables.push(this._webviewPanel)
+        this._disposables.push(this._webviewPanel);
     }
 
     /**
@@ -72,7 +72,9 @@ export default class ExtensionController implements vscode.Disposable {
          * register extension commands
          */
         this._registerCommand(cmdRingBell, () => bus.emit('ring', null));
-        this._registerCommand(cmdGetController, () => this)
+        this._registerCommand(cmdGetController, () => this);
+
+        console.log('[ExtensionController] extension activated');
     }
 
     /**
