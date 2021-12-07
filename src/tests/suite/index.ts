@@ -2,6 +2,9 @@ import path from 'path';
 import Mocha from 'mocha';
 import glob from 'glob';
 
+/**
+ * Note(Christian): making this method async causes the testrunner to not execute it
+ */
 export function run (testsRoot: string, cb: Function) {
     // Create the mocha test
     const mocha = new Mocha({
