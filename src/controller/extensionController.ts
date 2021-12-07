@@ -37,6 +37,12 @@ export default class ExtensionController implements vscode.Disposable {
             webviewOptions
         );
         this._disposables.push(this._webviewPanel);
+
+        /**
+         * this command has to be registered here as the activate command is
+         * not called when test is run
+         */
+        this._registerCommand(cmdGetController, () => this);
     }
 
     /**
@@ -72,7 +78,6 @@ export default class ExtensionController implements vscode.Disposable {
          * register extension commands
          */
         this._registerCommand(cmdRingBell, () => bus.emit('ring', null));
-        this._registerCommand(cmdGetController, () => this);
 
         console.log('[ExtensionController] extension activated');
     }

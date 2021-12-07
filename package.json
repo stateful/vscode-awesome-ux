@@ -1,84 +1,91 @@
 {
-	"name": "vscode-awesome-ux",
-	"displayName": "vscode-awesome-ux",
-	"description": "Reference implementation of vscode extension with awesome UX",
-	"version": "0.0.1",
-	"license": "Apache-2.0",
-	"engines": {
-		"vscode": "^1.61.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"*"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "tangle.emit",
-				"title": "Ring Bell!"
-			},
+  "name": "vscode-awesome-ux",
+  "displayName": "vscode-awesome-ux",
+  "description": "Reference implementation of vscode extension with awesome UX",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "publisher": "stateful",
+  "engines": {
+    "vscode": "^1.61.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "extensionKind": [
+    "ui"
+  ],
+  "enabledApiProposals": [
+    "extensionRuntime"
+  ],
+  "contributes": {
+    "commands": [
       {
-				"command": "vscode-awesome-ux.getController",
-				"title": "_"
-			}
-		],
-		"views": {
-			"explorer": [
-				{
-					"id": "panel1",
-					"name": "Example Panel 1",
-					"type": "webview",
-					"visibility": "visible"
-				},
-				{
-					"id": "panel2",
-					"name": "Example Panel 2",
-					"type": "webview",
-					"visibility": "visible"
-				}
-			]
-		}
-	},
-	"scripts": {
-		"build": "run-s clean compile",
-		"clean": "rimraf out",
-		"compile": "rollup -c ./rollup.config.mjs",
-		"test": "run-s test:*",
+        "command": "tangle.emit",
+        "title": "Ring Bell!"
+      },
+      {
+        "command": "vscode-awesome-ux.getController",
+        "title": "_"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "panel1",
+          "name": "Example Panel 1",
+          "type": "webview",
+          "visibility": "visible"
+        },
+        {
+          "id": "panel2",
+          "name": "Example Panel 2",
+          "type": "webview",
+          "visibility": "visible"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "run-s clean compile",
+    "clean": "rimraf out",
+    "compile": "rollup -c ./rollup.config.mjs",
+    "test": "run-s test:*",
     "test:lint": "eslint src --ext ts",
     "test:unit": "node ./out/tests/runTest.js",
-		"watch": "npm run clean && npm run compile -- --watch"
-	},
-	"devDependencies": {
-		"@rollup/plugin-node-resolve": "^13.0.6",
-		"@rollup/plugin-typescript": "^8.3.0",
-		"@types/glob": "^7.2.0",
-		"@types/mocha": "^9.0.0",
-		"@types/node": "14.x",
-		"@types/vscode": "^1.61.0",
-		"@typescript-eslint/eslint-plugin": "^5.2.0",
-		"@typescript-eslint/parser": "^5.2.0",
-		"@vscode/test-electron": "^1.6.2",
-		"eslint": "^8.1.0",
-		"eta": "^1.12.3",
-		"expect": "^27.4.2",
-		"glob": "^7.2.0",
-		"mocha": "^9.1.3",
-		"npm-run-all": "^4.1.5",
-		"rimraf": "^3.0.2",
-		"rollup": "^2.60.1",
-		"rollup-plugin-eta": "^0.1.3",
-		"tslib": "^2.3.1",
-		"typescript": "^4.4.3"
-	},
-	"dependencies": {
-		"@vscode/codicons": "^0.0.26",
-		"@vscode/webview-ui-toolkit": "^0.8.4",
-		"lit-element": "^3.0.2",
-		"rollup-plugin-multi-input": "^1.3.1",
-		"rxjs": "^7.4.0",
-		"tangle": "^1.0.0"
-	}
+    "watch": "npm run clean && npm run compile -- --watch"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.61.0",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "@vscode/test-electron": "^1.6.2",
+    "eslint": "^8.1.0",
+    "eta": "^1.12.3",
+    "expect": "^27.4.2",
+    "glob": "^7.2.0",
+    "mocha": "^9.1.3",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.60.1",
+    "rollup-plugin-eta": "^0.1.3",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "@vscode/codicons": "^0.0.26",
+    "@vscode/webview-ui-toolkit": "^0.8.4",
+    "lit-element": "^3.0.2",
+    "rollup-plugin-multi-input": "^1.3.1",
+    "rxjs": "^7.4.0",
+    "tangle": "^1.0.0"
+  }
 }

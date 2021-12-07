@@ -56,6 +56,8 @@ export default [{
         'assert',
         'path',
         'util',
+        'events',
+        'fs/promises',
         'vscode',
         'tangle/webviews',
         ...Object.keys(pkg.dependencies),

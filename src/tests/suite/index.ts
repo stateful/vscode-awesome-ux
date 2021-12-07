@@ -6,7 +6,8 @@ export function run (testsRoot: string, cb: Function) {
     // Create the mocha test
     const mocha = new Mocha({
         ui: 'tdd',
-        color: true
+        color: true,
+        timeout: 60 * 1000 // 10s
     });
 
     const files = glob.sync('**/**.test.js', { cwd: path.dirname(testsRoot) });
