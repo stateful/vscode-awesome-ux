@@ -2,16 +2,17 @@ import vscode from "vscode";
 import { EventEmitter } from 'events';
 
 import Channel from 'tangle/webviews';
-import type { Bus } from 'tangle';
 
 import TodoAppPanel from "../webview/todoApp";
 import { getHtmlForWebview } from '../utils';
-import { webviewOptions, tangleChannelName, cmdRingBell, cmdGetController } from '../constants';
+import { webviewOptions, tangleChannelName, cmdRingBell, cmdGetController, cmdActivated } from '../constants';
 
 
 export default class ExtensionController implements vscode.Disposable {
     private _event: EventEmitter = new EventEmitter();
     private _disposables: vscode.Disposable[] = [];
+    private _activationPromise = new Promise(
+        (resolve) => this._event.on(cmdActivated, resolve));
 
     // extension webviews
     private _examplePanel1: TodoAppPanel;
@@ -60,8 +61,8 @@ export default class ExtensionController implements vscode.Disposable {
         /**
          * register extension commands
          */
-        this._registerCommand(cmdRingBell, () => bus.emit('ring', null));
-        this._registerCommand(cmdGetController, () => this);
+        this._registerCommand(cmdRingBell, async () => (await bus).emit('ring', null));
+        this._registerCommand(cmdGetController, () => this._activationPromise);
 
         this._webviewPanel.webview.html = await getHtmlForWebview(
             this._webviewPanel.webview,
@@ -73,11 +74,14 @@ export default class ExtensionController implements vscode.Disposable {
          * ones all webviews got activated
          */
         const ch = new Channel<any>(tangleChannelName);
-        const bus = await ch.registerPromise([
+        const bus = ch.registerPromise([
             this._examplePanel1.webview,
             this._examplePanel2.webview,
             this._webviewPanel.webview
         ]);
+
+        this._event.emit(cmdActivated, this);
+        console.log(`[ExtensionController] extension activated`);
     }
 
     /**
