@@ -2,6 +2,7 @@ import vscode from "vscode";
 import { EventEmitter } from 'events';
 
 import Channel from 'tangle/webviews';
+import type { Bus } from 'tangle';
 
 import TodoAppPanel from "../webview/todoApp";
 import { getHtmlForWebview } from '../utils';
@@ -67,14 +68,16 @@ export default class ExtensionController implements vscode.Disposable {
             this._context.extensionUri
         );
 
+        /**
+         * run this last as the `registerPromise` function resolves
+         * ones all webviews got activated
+         */
         const ch = new Channel<any>(tangleChannelName);
         const bus = await ch.registerPromise([
             this._examplePanel1.webview,
             this._examplePanel2.webview,
             this._webviewPanel.webview
         ]);
-
-        console.log('[ExtensionController] extension activated');
     }
 
     /**

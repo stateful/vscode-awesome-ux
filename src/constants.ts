@@ -5,4 +5,4 @@ export const webviewOptions = {
 
 export const tangleChannelName = 'vscode-awesome-ux';
 export const cmdRingBell = 'tangle.emit';
-export const cmdGetController = 'vscode-awesome-ux.getController';
+export const cmdGetController = `${tangleChannelName}.getController`;
