@@ -3,8 +3,8 @@ export const webviewOptions = {
     retainContextWhenHidden: true
 };
 
-export const tangleChannelName = 'vscode-awesome-ux';
+export const extensionName = 'vscode-awesome-ux';
 export const cmdRingBell = 'tangle.emit';
-export const cmdCtrlReady = `${tangleChannelName}.ready`;
-export const cmdActivated = `${tangleChannelName}.activated`;
-export const cmdGetController = `${tangleChannelName}.getController`;
+export const cmdCtrlReady = `${extensionName}.ready`;
+export const cmdActivated = `${extensionName}.activated`;
+export const cmdGetController = `${extensionName}.getController`;

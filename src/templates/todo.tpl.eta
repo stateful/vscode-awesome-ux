@@ -6,8 +6,17 @@
     <title><%= it.title %></title>
     <meta
         http-equiv="Content-Security-Policy"
-        content="default-src 'none'; img-src <%= it.cspSource %>; script-src <%= it.cspSource %>; nonce-<%= it.nonce %>; style-src 'unsafe-inline' <%= it.cspSource %>; style-src-elem 'unsafe-inline' <%= it.cspSource %>; font-src <%= it.cspSource %>;"
+        content="
+          default-src 'none';
+          img-src <%= it.cspSource %>;
+          script-src <%= it.cspSource %>
+          'nonce-<%= it.nonce %>';
+          style-src 'unsafe-inline' <%= it.cspSource %>;
+          style-src-elem 'unsafe-inline' <%= it.cspSource %>;
+          font-src <%= it.cspSource %>;
+        "
     />
+    <meta data-extension-configuration='<%~ JSON.stringify(it.config) %>' />
 
     <% it.stylesheets.forEach((stylesheet) => { %>
         <link

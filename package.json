@@ -22,6 +22,19 @@
     "extensionRuntime"
   ],
   "contributes": {
+    "configuration": [
+      {
+        "title": "Awesome Extension",
+        "properties": {
+          "vscode-awesome-ux.configuration.defaultNotifications": {
+            "type": "number",
+            "scope": "resource",
+            "default": 0,
+            "markdownDescription": "The default value of received example notification (default `0`)"
+          }
+        }
+      }
+    ],
     "commands": [
       {
         "command": "tangle.emit",

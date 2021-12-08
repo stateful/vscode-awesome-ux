@@ -1,7 +1,10 @@
-import { Uri, Webview, window } from "vscode";
+import { Uri, Webview, window, workspace } from "vscode";
+import { extensionName } from './constants';
 
 // @ts-expect-error
 import tpl from './templates/todo.tpl.eta';
+
+const config = workspace.getConfiguration(extensionName);
 
 function getNonce() {
     let text = '';
@@ -39,6 +42,7 @@ export async function getHtmlForWebview(webview: Webview, extensionUri: Uri) {
     try {
         const html = await tpl({
             scripts, stylesheets, nonce: getNonce(), cspSource,
+            config: config.get('configuration'),
             title: 'VSCode Awesome UX',
             rootElem: 'todo-app'
         });

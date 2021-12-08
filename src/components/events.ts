@@ -7,16 +7,17 @@ import {
     LitElement,
     customElement
 } from 'lit-element';
-import { vscode } from './constants';
-import { tangleChannelName } from '../constants';
+
+import { vscode, config } from './constants';
+import { extensionName } from '../constants';
 
 interface TangleEvents {
     ring?: boolean
-}  
+}
 
 @customElement('app-events')
 export class Events extends LitElement {
-    private _notifications = 0;
+    private _notifications = config.defaultNotifications;
     private _client: Client<TangleEvents>;
 
     static get styles(): CSSResult {
@@ -42,7 +43,7 @@ export class Events extends LitElement {
             opacity: 1;
             transition-duration: 0s;
         }
-        
+
         :host > div > vscode-button {
             display: block;
             width: 80px;
@@ -53,7 +54,7 @@ export class Events extends LitElement {
     constructor () {
         super();
 
-        const channel = new Channel<TangleEvents>(tangleChannelName);
+        const channel = new Channel<TangleEvents>(extensionName);
         this._client = channel.attach(vscode);
         this._client.on('ring', () => {
             ++this._notifications;

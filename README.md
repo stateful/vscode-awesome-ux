@@ -17,19 +17,12 @@ The current version looks as follows:
 
 ![Demo](./.github/assets/vscode.gif)
 
-<!--
-ToDo(Christian): https://github.com/stateful/vscode-awesome-ux/issues/8
 ## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
 
 This extension contributes the following settings:
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
- -->
+* `vscode-awesome-ux.configuration.defaultNotifications`: The default value of received example notification (default `0`)
+
 <!--
 ToDo(Christian); https://github.com/stateful/vscode-awesome-ux/issues/9
 ## Release Notes

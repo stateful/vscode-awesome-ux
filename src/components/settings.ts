@@ -10,7 +10,7 @@ import { Checkbox } from '@vscode/webview-ui-toolkit';
 import type { Client } from 'tangle';
 
 import { vscode } from './constants';
-import { tangleChannelName } from '../constants';
+import { extensionName } from '../constants';
 
 interface State {
     syntaxEnabled: boolean
@@ -44,7 +44,7 @@ export class Settings extends LitElement {
     constructor () {
         super();
 
-        const channel = new Channel<State>(tangleChannelName, this._state);
+        const channel = new Channel<State>(extensionName, this._state);
         this._client = channel.attach(vscode);
         this._client.listen('syntaxEnabled', (state) => (this._setState('syntaxEnabled', state)));
         this._client.listen('debuggerEnabled', (state) => (this._setState('debuggerEnabled', state)));
@@ -55,7 +55,7 @@ export class Settings extends LitElement {
         return html/* html */`
         <vscode-radio-group orientation="vertical">
             <label slot="label">Editor Settings</label>
-            
+
             ${Object.entries(this._state).map(([name, val]) => html/* html */`
                 <vscode-checkbox id=${name} checked=${val} @change=${this._updateState}>${LABELS[name as keyof State]}</vscode-checkbox>
             `)}

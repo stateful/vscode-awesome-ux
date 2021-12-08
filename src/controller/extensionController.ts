@@ -6,7 +6,7 @@ import { getExtensionLogger } from '@vscode-logging/logger';
 
 import TodoAppPanel from "../webview/todoApp";
 import { getHtmlForWebview } from '../utils';
-import { webviewOptions, tangleChannelName, cmdRingBell, cmdGetController, cmdCtrlReady, cmdActivated } from '../constants';
+import { webviewOptions, extensionName, cmdRingBell, cmdGetController, cmdCtrlReady, cmdActivated } from '../constants';
 
 
 export default class ExtensionController implements vscode.Disposable {
@@ -82,7 +82,7 @@ export default class ExtensionController implements vscode.Disposable {
          * run this last as the `registerPromise` function resolves
          * ones all webviews got activated
          */
-        const ch = new Channel<any>(tangleChannelName);
+        const ch = new Channel<any>(extensionName);
         const bus = ch.registerPromise([
             this._examplePanel1.webview,
             this._examplePanel2.webview,
