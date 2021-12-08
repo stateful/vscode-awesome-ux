@@ -1,6 +1,7 @@
 An Awesome VSCode Extension
 ===========================
 
+[![Tests](https://github.com/stateful/vscode-awesome-ux/actions/workflows/test.yaml/badge.svg)](https://github.com/stateful/vscode-awesome-ux/actions/workflows/test.yaml)
 ![vscode version](https://vsmarketplacebadge.apphb.com/version/activecove.marquee.svg)
 ![number of installs](https://vsmarketplacebadge.apphb.com/installs/activecove.marquee.svg)
 ![average user rating](https://vsmarketplacebadge.apphb.com/rating/activecove.marquee.svg)
