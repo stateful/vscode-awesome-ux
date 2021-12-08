@@ -1,5 +1,5 @@
 import vscode from "vscode";
-import ExtensionController from './controller/extensionController';
+import ExtensionController from './controller/extension';
 import { cmdCtrlReady, cmdGetController } from './constants';
 
 export async function activate(context: vscode.ExtensionContext) {

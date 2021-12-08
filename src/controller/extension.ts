@@ -97,8 +97,8 @@ export default class ExtensionController implements vscode.Disposable {
      * Helper method to setup command registrations with arguments
      */
     private _registerCommand(command: string, listener: (...args: any[]) => void): void {
-        this._context.subscriptions.push(vscode.commands.registerCommand(command, (args: any) => {
-            this._event.emit(cmdRingBell, args);
+        this._disposables.push(vscode.commands.registerCommand(command, (args: any) => {
+            this._event.emit(command, args);
             return listener(args);
         }));
     }

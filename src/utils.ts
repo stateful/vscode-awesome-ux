@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { Uri, Webview, window, workspace } from "vscode";
 import { extensionName } from './constants';
 
@@ -5,15 +6,6 @@ import { extensionName } from './constants';
 import tpl from './templates/todo.tpl.eta';
 
 const config = workspace.getConfiguration(extensionName);
-
-function getNonce() {
-    let text = '';
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < 32; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
-}
 
 function getUri(webview: Webview, extensionUri: Uri, pathList: string[]) {
     return webview.asWebviewUri(Uri.joinPath(extensionUri, ...pathList));
@@ -41,7 +33,8 @@ export async function getHtmlForWebview(webview: Webview, extensionUri: Uri) {
 
     try {
         const html = await tpl({
-            scripts, stylesheets, nonce: getNonce(), cspSource,
+            scripts, stylesheets, cspSource,
+            nonce: crypto.randomBytes(16).toString('base64'),
             config: config.get('configuration'),
             title: 'VSCode Awesome UX',
             rootElem: 'todo-app'
