@@ -4,11 +4,11 @@ Building WebViews
 This is a best practices guide for building webviews in VSCode.
 
 1. [Architecture](#architecture)
-2. [Templating](#templating)
-3. [Components](#components)
-    3.1. [Adding Scripts to the Template](#adding-scripts-to-the-template)
-    3.2. [Custom Components](#custom-components)
-    3.3. [Shared `vscode` Instance](#shared-vscode-instance)
+1. [Templating](#templating)
+1. [Components](#components)
+    1. [Adding Scripts to the Template](#adding-scripts-to-the-template)
+    1. [Custom Components](#custom-components)
+    1. [Shared `vscode` Instance](#shared-vscode-instance)
 
 ## Architecture
 
