@@ -3,7 +3,7 @@ import path from 'path';
 import expect from 'expect';
 import vscode from 'vscode';
 
-import { getController, deactivate } from '../../extension';
+import { getController, deactivate } from '../..';
 
 async function getExtensionId() {
     const pkgJsonContent = await fs.readFile(path.resolve(__dirname, '..', '..', '..', 'package.json'));

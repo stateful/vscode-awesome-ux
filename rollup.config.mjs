@@ -23,7 +23,7 @@ export default [{
         resolve({ extensions })
     ]
 }, {
-    input: 'src/extension.ts',
+    input: 'src/index.ts',
     output: [
         {
             dir: 'out',
