@@ -1,9 +1,9 @@
 {
-  "name": "vscode-awesome-ux",
-  "displayName": "vscode-awesome-ux",
+  "name": "awesome-ux",
+  "displayName": "Awesome UX",
   "description": "Reference implementation of vscode extension with awesome UX",
   "version": "0.0.1",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "publisher": "stateful",
   "engines": {
     "vscode": "^1.61.0"
