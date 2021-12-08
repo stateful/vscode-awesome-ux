@@ -5,14 +5,14 @@ import Channel from 'tangle/webviews';
 
 import TodoAppPanel from "../webview/todoApp";
 import { getHtmlForWebview } from '../utils';
-import { webviewOptions, tangleChannelName, cmdRingBell, cmdGetController, cmdActivated } from '../constants';
+import { webviewOptions, tangleChannelName, cmdRingBell, cmdGetController, cmdCtrlReady, cmdActivated } from '../constants';
 
 
 export default class ExtensionController implements vscode.Disposable {
     private _event: EventEmitter = new EventEmitter();
     private _disposables: vscode.Disposable[] = [];
-    private _activationPromise = new Promise(
-        (resolve) => this._event.on(cmdActivated, resolve));
+    private _isReadyPromise = new Promise(
+        (resolve) => this._event.once(cmdActivated, resolve));
 
     // extension webviews
     private _examplePanel1: TodoAppPanel;
@@ -62,7 +62,8 @@ export default class ExtensionController implements vscode.Disposable {
          * register extension commands
          */
         this._registerCommand(cmdRingBell, async () => (await bus).emit('ring', null));
-        this._registerCommand(cmdGetController, () => this._activationPromise);
+        this._registerCommand(cmdCtrlReady, () => this._isReadyPromise);
+        this._registerCommand(cmdGetController, () => this);
 
         this._webviewPanel.webview.html = await getHtmlForWebview(
             this._webviewPanel.webview,
