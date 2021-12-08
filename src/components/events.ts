@@ -8,6 +8,7 @@ import {
     customElement
 } from 'lit-element';
 import { vscode } from './constants';
+import { tangleChannelName } from '../constants';
 
 interface TangleEvents {
     ring?: boolean
@@ -52,7 +53,7 @@ export class Events extends LitElement {
     constructor () {
         super();
 
-        const channel = new Channel<TangleEvents>('vscode-awesome-ux');
+        const channel = new Channel<TangleEvents>(tangleChannelName);
         this._client = channel.attach(vscode);
         this._client.on('ring', () => {
             ++this._notifications;

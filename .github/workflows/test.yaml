@@ -1,0 +1,20 @@
+name: Tests
+on: [push]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: yarn
+      - run: yarn build
+      - name: Run tests
+        uses: GabrielBB/xvfb-action@v1.0
+        with:
+          run: yarn test
