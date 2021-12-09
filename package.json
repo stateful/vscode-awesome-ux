@@ -1,15 +1,29 @@
 {
   "name": "awesome-ux",
   "displayName": "Awesome UX",
-  "description": "Reference implementation of vscode extension with awesome UX",
+  "description": "Reference implementation of an VSCode extension with an awesome UX",
   "version": "0.0.1",
   "license": "MIT",
   "publisher": "stateful",
+  "icon": ".github/assets/stateful.png",
+  "galleryBanner": {
+    "color": "#2F2F2F",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stateful/vscode-awesome-ux.git"
+  },
   "engines": {
     "vscode": "^1.61.0"
   },
   "categories": [
     "Other"
+  ],
+  "keywords": [
+    "vscode",
+    "extension",
+    "best practices"
   ],
   "activationEvents": [
     "onStartupFinished"
@@ -91,10 +105,10 @@
     "rollup": "^2.60.1",
     "rollup-plugin-eta": "^0.1.3",
     "tslib": "^2.3.1",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.3",
+    "vsce": "^2.5.1"
   },
   "dependencies": {
-    "@vscode-logging/logger": "^1.2.3",
     "@vscode/codicons": "^0.0.26",
     "@vscode/webview-ui-toolkit": "^0.8.4",
     "lit-element": "^3.0.2",

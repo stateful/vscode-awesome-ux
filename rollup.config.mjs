@@ -35,7 +35,7 @@ export default [{
         resolve({ extensions }),
         eta()
     ],
-    external: ['vscode', '@vscode-logging/logger']
+    external: ['vscode']
 }, {
     input: ['src/tests/**/*'],
     output: [

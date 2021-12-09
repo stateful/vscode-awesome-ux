@@ -2,7 +2,6 @@ import vscode from "vscode";
 import { EventEmitter } from 'events';
 
 import Channel from 'tangle/webviews';
-import { getExtensionLogger } from '@vscode-logging/logger';
 
 import TodoAppPanel from "../webview/todoApp";
 import { getHtmlForWebview } from '../utils';
@@ -14,13 +13,6 @@ export default class ExtensionController implements vscode.Disposable {
     private _disposables: vscode.Disposable[] = [];
     private _isReadyPromise = new Promise(
         (resolve) => this._event.once(cmdActivated, resolve));
-
-    private _log = getExtensionLogger({
-        extName: this._context.extension.id,
-        level: 'info',
-        logPath: this._context.logUri.fsPath,
-        logConsole: !process.env.CI
-    });
 
     // extension webviews
     private _examplePanel1: TodoAppPanel;
@@ -34,10 +26,10 @@ export default class ExtensionController implements vscode.Disposable {
     constructor(private _context: vscode.ExtensionContext) {
         this._context.subscriptions.push(this);
 
-        this._examplePanel1 = new TodoAppPanel(this._context, this._log, 'panel1');
+        this._examplePanel1 = new TodoAppPanel(this._context, 'panel1');
         this._disposables.push(vscode.window.registerWebviewViewProvider('panel1', this._examplePanel1));
 
-        this._examplePanel2 = new TodoAppPanel(this._context, this._log, 'panel2');
+        this._examplePanel2 = new TodoAppPanel(this._context, 'panel2');
         this._disposables.push(vscode.window.registerWebviewViewProvider('panel2', this._examplePanel2));
 
         this._webviewPanel = vscode.window.createWebviewPanel(
@@ -54,12 +46,12 @@ export default class ExtensionController implements vscode.Disposable {
      */
     deactivate(): void {
         this.dispose();
-        this._log.info('extension deactivated');
+        console.log('[ExtensionController] extension deactivated');
     }
 
     dispose () {
         this._disposables.forEach((disposable) => disposable.dispose());
-        this._log.info(`${this._disposables.length} items disposed`);
+        console.log(`[ExtensionController] ${this._disposables.length} items disposed`);
     }
 
     /**
@@ -90,7 +82,7 @@ export default class ExtensionController implements vscode.Disposable {
         ]);
 
         this._event.emit(cmdActivated, this);
-        this._log.info(`extension activated`);
+        console.log(`[ExtensionController] extension activated`);
     }
 
     /**
