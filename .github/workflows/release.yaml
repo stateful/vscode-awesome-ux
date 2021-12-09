@@ -51,8 +51,8 @@ jobs:
       - name: Push Tags
         run:  git push --tags
       - name: GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: ncipollo/release-action@v1
         with:
-          files: ./awesome-ux-*
-          body_path: ${{ github.workspace }}-CHANGELOG.txt
+          artifacts: "./awesome-ux-*,foo/*.txt"
+          bodyFile: ${{ github.workspace }}-CHANGELOG.txt
 
