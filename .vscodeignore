@@ -3,7 +3,8 @@
 .github/**
 !.github/assets
 node_modules/**
-!node_modules/@vscode-logging/logger
+!node_modules/@vscode/codicons
+!node_modules/@vscode/webview-ui-toolkit/dist/toolkit.js
 src/**
 .gitignore
 .yarnrc
