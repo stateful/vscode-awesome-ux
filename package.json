@@ -32,9 +32,6 @@
   "extensionKind": [
     "ui"
   ],
-  "enabledApiProposals": [
-    "extensionRuntime"
-  ],
   "contributes": {
     "configuration": [
       {
