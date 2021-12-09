@@ -36,8 +36,9 @@ jobs:
         with:
           run: yarn test
       - name: Create Changelog
+        # git log $(git describe --tags --abbrev=0)..HEAD --oneline &> ${{ github.workspace }}-CHANGELOG.txt
         run: |
-          git log $(git describe --tags --abbrev=0)..HEAD --oneline &> ${{ github.workspace }}-CHANGELOG.txt
+          echo "Initial Release" &> ${{ github.workspace }}-CHANGELOG.txt
           cat changelog.txt
       - name: Setup Git
         run: |
