@@ -37,21 +37,22 @@ jobs:
           run: yarn test
       - name: Create Changelog
         run: |
+          git tag
           git log $(git describe --tags --abbrev=0)..HEAD --oneline &> ${{ github.workspace }}-CHANGELOG.txt
           cat ${{ github.workspace }}-CHANGELOG.txt
-      - name: Setup Git
-        run: |
-          git config --global user.name "oss-stateful-bot"
-          git config --global user.email "christian+wombot@stateful.com"
-      - name: Package Extension
-        run:  yarn vsce package ${{github.event.inputs.releaseType}} ${{github.event.inputs.additionalFlags}}
-      - name: Release Extension
-        run:  yarn vsce publish ${{github.event.inputs.releaseType}} -p ${{ secrets.VSCODE_PAT }} ${{github.event.inputs.additionalFlags}}
-      - name: Push Tags
-        run:  git push --tags
-      - name: GitHub Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "./awesome-ux-*,foo/*.txt"
-          bodyFile: ${{ github.workspace }}-CHANGELOG.txt
+      # - name: Setup Git
+      #   run: |
+      #     git config --global user.name "oss-stateful-bot"
+      #     git config --global user.email "christian+wombot@stateful.com"
+      # - name: Package Extension
+      #   run:  yarn vsce package ${{github.event.inputs.releaseType}} ${{github.event.inputs.additionalFlags}}
+      # - name: Release Extension
+      #   run:  yarn vsce publish ${{github.event.inputs.releaseType}} -p ${{ secrets.VSCODE_PAT }} ${{github.event.inputs.additionalFlags}}
+      # - name: Push Tags
+      #   run:  git push --tags
+      # - name: GitHub Release
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     artifacts: "./awesome-ux-*,foo/*.txt"
+      #     bodyFile: ${{ github.workspace }}-CHANGELOG.txt
 
