@@ -1,0 +1,55 @@
+name: Manual NPM Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseType:
+        description: "Release type - major, minor or patch"
+        required: true
+        type: choice
+        default: "patch"
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Node version
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build Package
+        run: yarn build
+        env:
+          NODE_ENV: production
+      - name: Run tests
+        uses: GabrielBB/xvfb-action@v1.0
+        with:
+          run: yarn test
+      - name: Create Changelog
+        run: |
+          git log $(git describe --tags --abbrev=0)..HEAD --oneline &> ${{ github.workspace }}-CHANGELOG.txt
+          cat changelog.txt
+      - name: Setup Git
+        run: |
+          git config --global user.name "oss-stateful-bot"
+          git config --global user.email "christian+wombot@stateful.com"
+      - name: Release
+        run:  yarn vsce publish ${{github.event.inputs.releaseType}} -p ${{ secrets.VSCODE_PAT }} ${{github.event.inputs.additionalFlags}}
+      - name: Push Tags
+        run:  git push --tags
+      - name: GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./awesome-ux-*
+          body_path: ${{ github.workspace }}-CHANGELOG.txt
+
