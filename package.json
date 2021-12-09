@@ -6,11 +6,24 @@
   "license": "MIT",
   "publisher": "stateful",
   "icon": ".github/assets/stateful.png",
+  "galleryBanner": {
+    "color": "#2F2F2F",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stateful/vscode-awesome-ux.git"
+  },
   "engines": {
     "vscode": "^1.61.0"
   },
   "categories": [
     "Other"
+  ],
+  "keywords": [
+    "vscode",
+    "extension",
+    "best practices"
   ],
   "activationEvents": [
     "onStartupFinished"
