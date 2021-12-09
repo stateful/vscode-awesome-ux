@@ -46,18 +46,18 @@ jobs:
       - name: Package Extension
         run:  yarn vsce package ${{ github.event.inputs.releaseType }} --yarn --no-git-tag-version --no-update-package-json ${{ github.event.inputs.additionalFlags }}
       - name: Release Extension
-        run:  yarn vsce publish ${{ github.event.inputs.releaseType }} --yarn -m "Release stateful.awesome-ux" -p ${{ secrets.VSCODE_PAT }} ${{ github.event.inputs.additionalFlags }}
+        run:  yarn vsce publish ${{ github.event.inputs.releaseType }} --yarn -p ${{ secrets.VSCODE_PAT }} ${{ github.event.inputs.additionalFlags }}
       - name: Push Tags
         run: |
           git log -1 --stat
           git push origin main --tags
       - run: |
           export GIT_TAG=$(git describe --tags --abbrev=0)
-          echo "::set-env name=GIT_TAG::$GIT_TAG"
+          echo "GIT_TAG=$GIT_TAG" >> $GITHUB_ENV
       - name: GitHub Release
         uses: ncipollo/release-action@v1
         with:
           artifacts: "./awesome-ux-*,foo/*.txt"
           bodyFile: ${{ github.workspace }}-CHANGELOG.txt
-          tag: $GIT_TAG
+          tag: ${{ env.GIT_TAG }}
 
