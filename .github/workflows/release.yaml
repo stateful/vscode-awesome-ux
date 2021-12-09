@@ -44,7 +44,9 @@ jobs:
         run: |
           git config --global user.name "oss-stateful-bot"
           git config --global user.email "christian+wombot@stateful.com"
-      - name: Release
+      - name: Package Extension
+        run:  yarn vsce package ${{github.event.inputs.releaseType}} ${{github.event.inputs.additionalFlags}}
+      - name: Release Extension
         run:  yarn vsce publish ${{github.event.inputs.releaseType}} -p ${{ secrets.VSCODE_PAT }} ${{github.event.inputs.additionalFlags}}
       - name: Push Tags
         run:  git push --tags
