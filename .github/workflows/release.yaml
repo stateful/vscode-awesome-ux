@@ -57,7 +57,7 @@ jobs:
       - name: GitHub Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "./awesome-ux-*,foo/*.txt"
+          artifacts: "./awesome-ux-*"
           bodyFile: ${{ github.workspace }}-CHANGELOG.txt
           tag: ${{ env.GIT_TAG }}
 
