@@ -2,9 +2,9 @@ An Awesome VSCode Extension
 ===========================
 
 [![Tests](https://github.com/stateful/vscode-awesome-ux/actions/workflows/test.yaml/badge.svg)](https://github.com/stateful/vscode-awesome-ux/actions/workflows/test.yaml)
-![vscode version](https://vsmarketplacebadge.apphb.com/version/activecove.marquee.svg)
-![number of installs](https://vsmarketplacebadge.apphb.com/installs/activecove.marquee.svg)
-![average user rating](https://vsmarketplacebadge.apphb.com/rating/activecove.marquee.svg)
+![vscode version](https://vsmarketplacebadge.apphb.com/version/stateful.awesome-ux.svg)
+![number of installs](https://vsmarketplacebadge.apphb.com/installs/stateful.awesome-ux.svg)
+![average user rating](https://vsmarketplacebadge.apphb.com/rating/stateful.awesome-ux.svg)
 ![license](https://img.shields.io/github/license/stateful/vscode-awesome-ux.svg)
 
 This extension is a best practices guide for writing great VSCode extensions. It can be used as boilerplate template to start of with a new extension.
