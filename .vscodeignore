@@ -1,6 +1,7 @@
 .vscode/**
 .vscode-test/**
 .github/**
+!.github/assets
 node_modules/**
 !node_modules/@vscode-logging/logger
 src/**
