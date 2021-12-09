@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import expect from 'expect';
 import vscode from 'vscode';
+import { before } from 'mocha';
 
 import { getController, deactivate } from '../..';
 
@@ -12,6 +13,9 @@ async function getExtensionId() {
 }
 
 suite('Extension Test Suite', function () {
+    // ToDo(Christian): make tests more reliable without implicit waits
+    before(() => new Promise((resolve) => setTimeout(resolve, 5000)));
+
     test('extension got activated', async () => {
         const ext = vscode.extensions.getExtension(await getExtensionId());
         expect(ext).toBeTruthy();
