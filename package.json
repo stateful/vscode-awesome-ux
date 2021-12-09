@@ -109,7 +109,6 @@
     "vsce": "^2.5.1"
   },
   "dependencies": {
-    "@vscode-logging/logger": "^1.2.3",
     "@vscode/codicons": "^0.0.26",
     "@vscode/webview-ui-toolkit": "^0.8.4",
     "lit-element": "^3.0.2",
