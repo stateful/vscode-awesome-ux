@@ -12,7 +12,8 @@ export default [{
     output: [
         {
             file: './out/webview.js',
-            format: 'esm'
+            format: 'esm',
+            sourcemap: true,
         },
     ],
     plugins: [
@@ -27,7 +28,8 @@ export default [{
     output: [
         {
             dir: 'out',
-            format: 'cjs'
+            format: 'cjs',
+            sourcemap: true,
         },
     ],
     plugins: [
@@ -41,7 +43,8 @@ export default [{
     output: [
         {
             dir: 'out',
-            format: 'cjs'
+            format: 'cjs',
+            sourcemap: true,
         },
     ],
     plugins: [
