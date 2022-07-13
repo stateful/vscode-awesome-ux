@@ -60,6 +60,7 @@ export default [{
         'path',
         'util',
         'events',
+        'crypto',
         'fs/promises',
         'vscode',
         'tangle/webviews',

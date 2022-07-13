@@ -41,7 +41,7 @@ export async function getHtmlForWebview(webview: Webview, extensionUri: Uri) {
         });
         return html!;
     } catch (err: any) {
-        window.showErrorMessage(`Couldn't open WebdriverIO configuration file: ${err.message}`);
+        window.showErrorMessage(`Couldn't generate template: ${err.message}`);
         return '';
     }
 }
