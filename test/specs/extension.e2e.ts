@@ -10,13 +10,16 @@ describe('workbench', () => {
          */
         await browser.$('h3[title="Example Panel 1"').click();
         await browser.$('h3[title="Example Panel 2"').click();
-        await browser.pause(1000);
     });
 
     describe('test webviews', () => {
         let webviews: Webview[] = [];
 
         before(async () => {
+            await browser.waitUntil(
+                // wait until all 3 webviews are existing
+                async () => (await $$('.webview.ready')).length === 3);
+
             const frames = await $$('.webview.ready');
             webviews = frames.map((frame) => new Webview(frame));
         });
