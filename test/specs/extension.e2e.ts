@@ -10,7 +10,7 @@ describe('workbench', () => {
          */
         await browser.$('h3[title="Example Panel 1"').click();
         await browser.$('h3[title="Example Panel 2"').click();
-        await browser.pause(200);
+        await browser.pause(1000);
     });
 
     describe('test webviews', () => {
