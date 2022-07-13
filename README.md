@@ -32,21 +32,10 @@ This extension contributes the following settings:
 
 * `vscode-awesome-ux.configuration.defaultNotifications`: The default value of received example notification (default `0`)
 
-<!--
-ToDo(Christian); https://github.com/stateful/vscode-awesome-ux/issues/9
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+See [release section](https://github.com/stateful/vscode-awesome-ux/releases).
 
-### 1.0.0
+---
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
--->
+<p align="center"><small>Copyright 2022 © <a href="http://stateful.com/">Stateful</a> – MIT License</small></p>
