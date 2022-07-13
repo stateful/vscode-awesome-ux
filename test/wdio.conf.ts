@@ -1,3 +1,4 @@
+import fs from 'fs/promises';
 import path from 'path';
 import type { Options } from '@wdio/types';
 
@@ -265,9 +266,16 @@ export const config: Options.Testrunner = {
      * @param {Boolean} result.passed    true if test has passed, otherwise false
      * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
+    afterTest: async function (test, __, { passed }) {
+        if (passed) {
+            return;
+        }
 
+        console.log('Capturing screenshot for debugging');
+        const screenshotDir = path.join(__dirname, 'screenshots');
+        await fs.mkdir(screenshotDir, { recursive: true });
+        await browser.saveScreenshot(path.join(screenshotDir, `${test.parent} - ${test.title}.png`));
+    }
 
     /**
      * Hook that gets executed after the suite has ended

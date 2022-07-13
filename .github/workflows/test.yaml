@@ -15,3 +15,10 @@ jobs:
         uses: GabrielBB/xvfb-action@v1.0
         with:
           run: yarn test
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: screenshots
+          path: |
+            test/screenshots
+            test/logs
