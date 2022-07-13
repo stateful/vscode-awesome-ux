@@ -38,33 +38,4 @@ export default [{
         eta()
     ],
     external: ['vscode']
-}, {
-    input: ['src/tests/**/*'],
-    output: [
-        {
-            dir: 'out',
-            format: 'cjs',
-            sourcemap: true,
-        },
-    ],
-    plugins: [
-        multiInput.default(),
-        typescript({
-            tsconfig: './tsconfig.json',
-            declaration: false
-        }),
-        eta()
-    ],
-    external: [
-        'assert',
-        'path',
-        'util',
-        'events',
-        'crypto',
-        'fs/promises',
-        'vscode',
-        'tangle/webviews',
-        ...Object.keys(pkg.dependencies),
-        ...Object.keys(pkg.devDependencies)
-    ]
 }];
