@@ -1,4 +1,4 @@
-import { Webview } from '../pageobjects/webview';
+import { ExtensionWebView } from '../pageobjects/extension';
 
 describe('workbench', () => {
     before(async () => {
@@ -13,15 +13,15 @@ describe('workbench', () => {
     });
 
     describe('test webviews', () => {
-        let webviews: Webview[] = [];
+        let webviews: ExtensionWebView[] = [];
 
         before(async () => {
             await browser.waitUntil(
                 // wait until all 3 webviews are existing
                 async () => (await $$('.webview.ready')).length === 3);
 
-            const frames = await $$('.webview.ready');
-            webviews = frames.map((frame) => new Webview(frame));
+            const workbench = await browser.getWorkbench();
+            webviews = (await workbench.getAllWebviews()).map((w) => new ExtensionWebView(w));
         });
 
         it('can load editor webview', async () => {
@@ -39,28 +39,21 @@ describe('workbench', () => {
             await webviews[0].ring();
 
             expect(await webviews[0].getRingCount()).toBe('3');
-            await webviews[0].close();
         });
 
         it('verifies amount in Exampel Panel 1', async () => {
-            await webviews[1].open();
             expect(await webviews[1].getRingCount()).toBe('3');
             await webviews[1].ring();
-            await webviews[1].close();
         });
 
         it('verifies amount in Exampel Panel 2 and enables debugger', async () => {
-            await webviews[2].open();
             expect(await webviews[2].getRingCount()).toBe('4');
             await webviews[2].toggleDebugger();
-            await webviews[2].close();
         });
 
         it('verifies debugger is enabled in editor webview', async () => {
-            await webviews[0].open();
             await expect(webviews[2].debuggerEnabledCheckbox$)
                 .toHaveAttribute('checked', 'true');
-            await webviews[0].close();
         });
     });
 });

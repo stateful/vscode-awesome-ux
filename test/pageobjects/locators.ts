@@ -1,7 +1,5 @@
 
-export const webview = {
-    outerFrame: '.webview.ready',
-    innerFrame: '#active-frame',
+export const extensionWebView = {
     badge: '>>>vscode-badge',
     ringBtn: '>>>vscode-button',
 

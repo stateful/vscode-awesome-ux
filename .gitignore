@@ -20,3 +20,4 @@ vscode.db
 .vscode-test
 /.profile-oss
 test/.wdio-vscode-service
+test/screenshots
