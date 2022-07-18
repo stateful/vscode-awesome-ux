@@ -8,6 +8,7 @@ import {
 import Channel from 'tangle/webviews';
 import { Checkbox } from '@vscode/webview-ui-toolkit';
 import type { Client } from 'tangle';
+import type { Webview } from 'vscode';
 
 import { vscode } from './constants';
 import { extensionName } from '../constants';
@@ -45,7 +46,7 @@ export class Settings extends LitElement {
         super();
 
         const channel = new Channel<State>(extensionName, this._state);
-        this._client = channel.attach(vscode);
+        this._client = channel.attach(vscode as any as Webview);
         this._client.listen('syntaxEnabled', (state) => (this._setState('syntaxEnabled', state)));
         this._client.listen('debuggerEnabled', (state) => (this._setState('debuggerEnabled', state)));
         this._client.listen('replaceTabsWithSpaces', (state) => (this._setState('replaceTabsWithSpaces', state)));

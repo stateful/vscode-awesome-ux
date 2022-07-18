@@ -7,6 +7,7 @@ import {
     LitElement,
     customElement
 } from 'lit-element';
+import type { Webview } from 'vscode';
 
 import { vscode, config } from './constants';
 import { extensionName } from '../constants';
@@ -55,7 +56,7 @@ export class Events extends LitElement {
         super();
 
         const channel = new Channel<TangleEvents>(extensionName);
-        this._client = channel.attach(vscode);
+        this._client = channel.attach(vscode as any as Webview);
         this._client.on('ring', () => {
             ++this._notifications;
             this.requestUpdate();

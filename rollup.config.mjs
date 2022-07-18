@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
-import multiInput from 'rollup-plugin-multi-input';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
+import nodePolyfills from 'rollup-plugin-node-polyfills'
 import eta from 'rollup-plugin-eta';
 
 const pkg = JSON.parse((await fs.readFile('package.json')).toString());
@@ -38,4 +38,20 @@ export default [{
         eta()
     ],
     external: ['vscode']
+}, {
+    input: 'src/index.ts',
+    output: [
+        {
+            file: './out/web.js',
+            format: 'cjs',
+            sourcemap: true,
+        },
+    ],
+    external: ['vscode'],
+    plugins: [,
+        nodePolyfills(),
+        typescript({ tsconfig: './tsconfig.json' }),
+        resolve({ extensions, browser: true }),
+        eta()
+    ]
 }];
