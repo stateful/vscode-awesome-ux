@@ -3,7 +3,12 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        vscodeVersion:
+          - stable
+          - web
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -15,6 +20,9 @@ jobs:
         uses: GabrielBB/xvfb-action@v1.0
         with:
           run: yarn test
+        env:
+          VSCODE_VERSION: ${{ matrix.vscodeVersion }}
+          VSCODE_WEB_TESTS: ${{ matrix.vscodeVersion == 'web' && '1' || '0' }}
       - uses: actions/upload-artifact@v3
         if: failure()
         with:

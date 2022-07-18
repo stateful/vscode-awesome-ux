@@ -1,6 +1,30 @@
 import fs from 'fs/promises';
 import path from 'path';
-import type { Options } from '@wdio/types';
+import type { Options, Capabilities } from '@wdio/types';
+
+const isWebTest = Boolean(parseInt(process.env.VSCODE_WEB_TESTS || '', 10));
+const capabilities: Capabilities.Capabilities = {
+    ...(isWebTest
+        ? {
+            browserName: 'chrome',
+            'goog:chromeOptions': {
+                args: process.env.CI
+                    ? ['--headless', '--disable-gpu', '--window-size=1440,735']
+                    : []
+            }
+        }
+        : {
+            browserName: 'vscode',
+            browserVersion: process.env.VSCODE_VERSION || 'stable'
+        }
+    ),
+    'wdio:vscodeOptions': {
+        extensionPath: path.join(__dirname, '..'),
+        workspacePath: path.join(__dirname, '..'),
+        filePath: path.join(__dirname, '..', 'README.md')
+        // verboseLogging: true
+    }
+};
 
 export const config: Options.Testrunner = {
     //
@@ -83,14 +107,7 @@ export const config: Options.Testrunner = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
-        browserName: 'vscode',
-        browserVersion: 'stable', // "insiders" or "stable" for latest VSCode version
-        'wdio:vscodeOptions': {
-            extensionPath: path.join(__dirname, '..'),
-            workspacePath: path.join(__dirname, '..'),
-        }
-    }],
+    capabilities: [capabilities],
     //
     // ===================
     // Test Configurations
