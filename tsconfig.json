@@ -19,6 +19,6 @@
     "node_modules",
     ".vscode-test",
     "./out/**/*",
-    "./test/wdio.conf.ts"
+    "./test/**/*"
   ]
 }
