@@ -2,7 +2,7 @@
 	"name": "awesome-ux",
 	"displayName": "Awesome UX",
 	"description": "Reference implementation of an VSCode extension with an awesome UX",
-	"version": "0.3.3",
+	"version": "0.4.0",
 	"license": "MIT",
 	"publisher": "stateful",
 	"icon": ".github/assets/stateful.png",
