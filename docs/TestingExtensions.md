@@ -174,6 +174,6 @@ Check out this test pipeline in action for the [`VS Code Awesome UX Extension`](
 
 # Summary
 
-Many VS Code extensions in the marketplace are tested either not at all or very frugal. The tooling recommended in the VS Code documentation has shown to offer limited automation capabilities needed to properly test the correct usage of the VS Code APIs and all developer workflows. As more and more VS Code extensions become critical building blocks to our developer experience, extension authors should ensure that new extension releases don't break that experience and the developer productivity.
+Many VS Code extensions in the marketplace are tested either not at all or very frugal. The tooling recommended in the VS Code documentation has shown to offer limited automation capabilities needed to properly test the correct usage of the VS Code APIs and all developer workflows. As more and more VS Code extensions become critical building blocks to our developer experience, extension authors should ensure that new extension releases don't break that experience and the developer productivity overall.
 
 While mostly unit and integration tests should cover most of the issues that might arise, a small set of e2e tests can help us to detect if configuration and usage of used VS Code APIs are correct and that the value an extension offers works from end to end. WebdriverIO with its VS Code testing service provides extension developers an all in one solution to run all of the tests efficiently on your local machine or in CI/CD.
