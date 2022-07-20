@@ -1,22 +1,22 @@
 Testing Extensions
 ==================
 
-The VS Code team at Microsoft [recommends](https://code.visualstudio.com/api/working-with-extensions/testing-extension) to use [`@vscode/test-electron`](https://www.npmjs.com/package/@vscode/test-electron) and [`@vscode/test-web`](https://www.npmjs.com/package/@vscode/test-web) for testing extensions. These packages allow you to run [Mocha](https://mochajs.org/) tests inside the extension host, which gives you access to the VSCode API to trigger certain events and automate VS Code to a certain extend. This will work for you as long as you only interested in running simple unit and integration tests. However if your extension uses [webviews](https://code.visualstudio.com/api/extension-guides/webview#:~:text=The%20webview%20API%20allows%20extensions,VS%20Code's%20native%20APIs%20support.) and offers complex user interfaces you might want to consider using [WebdriverIO](https://webdriver.io/) and its [VS Code plugin service](https://webdriver.io/docs/wdio-vscode-service) for e2e testing.
+The VS Code team at Microsoft [recommends](https://code.visualstudio.com/api/working-with-extensions/testing-extension) using [`@vscode/test-electron`](https://www.npmjs.com/package/@vscode/test-electron) and [`@vscode/test-web`](https://www.npmjs.com/package/@vscode/test-web) for testing extensions. These packages allow you to run [Mocha](https://mochajs.org/) tests inside the extension host, which gives you access to the VSCode API to trigger certain events and automate VS Code to a certain extent. This will work for you as long as you are only interested in running simple unit and integration tests. However if your extension uses [webviews](https://code.visualstudio.com/api/extension-guides/webview#:~:text=The%20webview%20API%20allows%20extensions,VS%20Code's%20native%20APIs%20support.) and offers complex user interfaces you might want to consider using [WebdriverIO](https://webdriver.io/) and its [VS Code plugin service](https://webdriver.io/docs/wdio-vscode-service) for e2e testing.
 
-With WebdriverIO you can automate VS Code like any other Electron or web application. It offers some neat features similar as the packages mentioned above but goes beyond just automating VS Code through its API. The WebdriverIO service helps you to get up and running seamlessly by:
+With WebdriverIO you can automate VS Code like any other Electron or web application. It offers some neat features similar to the packages mentioned above but goes beyond just automating VS Code through its API. The WebdriverIO service helps you to get up and running seamlessly by:
 
 - 🏗️ Installing VS Code (either stable, insiders or a specified version)
 - ⬇️ Downloading Chromedriver specific to given VS Code version
 - 🚀 Enables you to access the VS Code API from your tests
 - 🖥️ Starting VS Code with custom user settings (including support for VS Code on Ubuntu, MacOS and Windows)
 - 🌐 Or serves VS Code from a server to be accessed by any browser for testing web extensions
-- 📔 Bootstraping page objects with locators matching your VS Code version
+- 📔 Bootstrapping page objects with locators matching your VS Code version
 
 With this you can run your unit and integration tests by accessing the VS Code APIs and at the same time automate VS Code to test any complex user flows or webviews in one single test framework.
 
 ## Setup
 
-To start tesing your extension project using WebdriverIO, we have to setup our project by running:
+To start testing your extension project using WebdriverIO, we have to set up our project by running:
 
 ```sh
 npm create wdio ./
@@ -36,7 +36,7 @@ export const config = {
     // ...
     capabilities: [{
         browserName: 'vscode',
-        browserVersion: 'stabke',
+        browserVersion: 'stable',
         'wdio:vscodeOptions': {
             // point to the root directory of your project
             extensionPath: path.join(__dirname, '..'),
@@ -46,7 +46,7 @@ export const config = {
 };
 ```
 
-This will tell WebdriverIO to download and setup VS Code stable for you. You can also pick any arbitray version VS Code has released or `insiders`. Lastly, let's create a demo test to print the application title, e.g.:
+This will tell WebdriverIO to download and set up VS Code stable for you. You can also pick any arbitrary version VS Code has released or `insiders`. Lastly, let's create a demo test to print the application title, e.g.:
 
 ```ts
 // test/specs/demo.test.ts
