@@ -12,7 +12,7 @@ const workbench = () => {
         // simulate lazy resolution
         setTimeout(async () => {
             await browser.$('h3[title="Example Panel 2"').click();
-        }, 30 * 1000);
+        }, 10 * 1000);
     });
 
     describe('test webviews', () => {
