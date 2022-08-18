@@ -21,6 +21,20 @@ describe('workbench', () => {
                 async () => (await $$('.webview.ready')).length === 3);
 
             const workbench = await browser.getWorkbench();
+            const editor = await workbench.getEditorView();
+
+            await browser.waitUntil(async () => {
+                const tabs = await editor.getOpenTabs();
+
+                for (const tab of tabs) {
+                    const tabTitle = await tab.getTitle();
+                    if (tabTitle.includes('Example WebView Panel')) {
+                        await tab.select();
+                        return true;
+                    }
+                }
+                return false;
+            });
             webviews = (await workbench.getAllWebviews()).map((w) => new ExtensionWebView(w));
         });
 
