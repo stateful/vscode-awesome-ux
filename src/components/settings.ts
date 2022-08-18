@@ -2,9 +2,9 @@ import {
     html,
     css,
     CSSResult,
-    LitElement,
-    customElement
-} from 'lit-element';
+    LitElement
+} from 'lit';
+import { customElement } from 'lit/decorators.js';
 import Channel from 'tangle/webviews';
 import { Checkbox } from '@vscode/webview-ui-toolkit';
 import type { Client } from 'tangle';

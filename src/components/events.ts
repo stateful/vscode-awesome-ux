@@ -4,9 +4,9 @@ import {
     css,
     html,
     CSSResult,
-    LitElement,
-    customElement
-} from 'lit-element';
+    LitElement
+} from 'lit';
+import { customElement } from 'lit/decorators.js';
 import type { Webview } from 'vscode';
 
 import { vscode, config } from './constants';
