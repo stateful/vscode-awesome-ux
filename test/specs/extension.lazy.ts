@@ -1,6 +1,7 @@
+import { ChainablePromiseElement } from 'webdriverio';
 import { ExtensionWebView } from '../pageobjects/extension';
 
-const workbench = () => {
+describe('workbench', () => {
     before(async () => {
         const workbench = await browser.getWorkbench();
 
@@ -9,19 +10,15 @@ const workbench = () => {
          * https://github.com/stateful/tangle/issues/37
          */
         await browser.$('h3[title="Example Panel 1"').click();
-        // simulate lazy resolution
-        setTimeout(async () => {
-            await browser.$('h3[title="Example Panel 2"').click();
-        }, 10 * 1000);
     });
 
-    describe('test webviews', () => {
+    describe('test three webviews with one lagging in resolution', () => {
         let webviews: ExtensionWebView[] = [];
 
         before(async () => {
             await browser.waitUntil(
-                // wait with 10s timeout until webviews are existing
-                async () => (await $$('.webview.ready')).length === 2, { timeout: 10 * 1000 });
+                // wait until at least two webviews are existing
+                async () => (await $$('.webview.ready')).length === 2);
 
             const workbench = await browser.getWorkbench();
             webviews = (await workbench.getAllWebviews()).map((w) => new ExtensionWebView(w));
@@ -58,7 +55,38 @@ const workbench = () => {
             await expect(webviews[0].debuggerEnabledCheckbox$)
                 .toHaveAttribute('checked', 'true');
         });
-    });
-};
 
-describe('workbench', workbench);
+        it('bring third webview (second panel) into play', async () => {
+            await webviews[0].close();
+            const workbench = await browser.getWorkbench();
+            const examplePanel2 = await browser.$('h3[title="Example Panel 2"');
+            await examplePanel2.click();
+            await browser.waitUntil(
+                // wait until 3 webviews are existing
+                async () => (await $$('.webview.ready')).length === 3);
+
+            webviews = (await workbench.getAllWebviews()).map((w) => new ExtensionWebView(w));
+        });
+
+        it('can ring the bell from both main and lagging webview', async ()=> {
+            await webviews[0].open();
+            await webviews[0].ring();
+            await browser.pause(200);
+            await webviews[0].ring();
+            await browser.pause(200);
+            await webviews[0].ring();
+            await browser.pause(200);
+            await webviews[2].ring();
+            await browser.pause(200);
+
+            expect(await webviews[2].getRingCount()).toBe('4');
+        });
+
+        it('verifies syntax highlighting is disabled in editor webview', async () => {
+            await webviews[2].toggleSyntaxHighlighting();
+
+            await expect(webviews[0].syntaxEnabledCheckbox$)
+                .toHaveAttribute('checked', 'true');
+        });
+    });
+});
