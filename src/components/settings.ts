@@ -54,13 +54,11 @@ export class Settings extends LitElement {
 
     render() {
         return html/* html */`
-        <vscode-radio-group orientation="vertical">
             <label slot="label">Editor Settings</label>
 
             ${Object.entries(this._state).map(([name, val]) => html/* html */`
-                <vscode-checkbox id=${name} checked=${val} @change=${this._updateState}>${LABELS[name as keyof State]}</vscode-checkbox>
+                <br /><vscode-checkbox id=${name} checked=${val} @change=${this._updateState}>${LABELS[name as keyof State]}</vscode-checkbox>
             `)}
-        </vscode-radio-group>
         `;
     }
 

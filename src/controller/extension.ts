@@ -1,4 +1,5 @@
 import vscode from "vscode";
+import type { Webview } from "vscode";
 import { EventEmitter } from 'events';
 
 import Channel from 'tangle/webviews';
@@ -6,6 +7,7 @@ import Channel from 'tangle/webviews';
 import TodoAppPanel from "../webview/todoApp";
 import { getHtmlForWebview } from '../utils';
 import { webviewOptions, extensionName, cmdRingBell, cmdGetController, cmdCtrlReady, cmdActivated } from '../constants';
+import { Observable, of } from "rxjs";
 
 
 export default class ExtensionController implements vscode.Disposable {
@@ -58,13 +60,6 @@ export default class ExtensionController implements vscode.Disposable {
      * Initializes the extension
      */
     public async activate() {
-        /**
-         * register extension commands
-         */
-        this._registerCommand(cmdRingBell, async () => (await bus).emit('ring', null));
-        this._registerCommand(cmdCtrlReady, () => this._isReadyPromise);
-        this._registerCommand(cmdGetController, () => this);
-
         this._webviewPanel.webview.html = await getHtmlForWebview(
             this._webviewPanel.webview,
             this._context.extensionUri
@@ -75,11 +70,21 @@ export default class ExtensionController implements vscode.Disposable {
          * ones all webviews got activated
          */
         const ch = new Channel<any>(extensionName);
-        const bus = ch.registerPromise([
+        const bus$ = ch.register([
             this._examplePanel1.webview,
             this._examplePanel2.webview,
-            this._webviewPanel.webview
+            of(this._webviewPanel.webview)
         ]);
+
+        bus$.subscribe(bus => {
+            /**
+             * register extension commands
+             */
+            this._registerCommand(cmdRingBell, async () => bus.emit('ring', null));
+            this._registerCommand(cmdCtrlReady, () => this._isReadyPromise);
+            this._registerCommand(cmdGetController, () => this);
+        });
+
 
         this._event.emit(cmdActivated, this);
         console.log(`[ExtensionController] extension activated`);
