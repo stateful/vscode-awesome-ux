@@ -48,7 +48,7 @@ export default [{
         },
     ],
     external: ['vscode'],
-    plugins: [,
+    plugins: [
         nodePolyfills(),
         typescript({ tsconfig: './tsconfig.json' }),
         resolve({ extensions, browser: true }),
