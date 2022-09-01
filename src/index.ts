@@ -1,8 +1,11 @@
 import vscode from "vscode";
+import { TelemetryReporter } from 'vscode-telemetry';
+
 import ExtensionController from './controller/extension';
 import { cmdCtrlReady, cmdGetController } from './constants';
 
 export async function activate(context: vscode.ExtensionContext) {
+    TelemetryReporter.configure(context, process.env.INSTRUMENTATION_KEY!);
     const controller = new ExtensionController(context);
     await controller.activate();
 }

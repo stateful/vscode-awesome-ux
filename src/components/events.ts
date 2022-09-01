@@ -7,6 +7,7 @@ import {
     LitElement
 } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { TelemetryReporter } from 'vscode-telemetry/webview';
 import type { Webview } from 'vscode';
 
 import { vscode, config } from './constants';
@@ -15,6 +16,8 @@ import { extensionName } from '../constants';
 interface TangleEvents {
     ring?: boolean
 }
+
+const reporter = TelemetryReporter.configure(vscode);
 
 @customElement('app-events')
 export class Events extends LitElement {
@@ -79,6 +82,7 @@ export class Events extends LitElement {
     }
 
     private _ringBell() {
+        reporter.sendTelemetryEvent('bellRinged');
         this._client.emit('ring', true);
     }
 }
