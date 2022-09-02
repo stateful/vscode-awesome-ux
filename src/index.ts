@@ -5,7 +5,8 @@ import ExtensionController from './controller/extension';
 import { cmdCtrlReady, cmdGetController } from './constants';
 
 export async function activate(context: vscode.ExtensionContext) {
-    TelemetryReporter.configure(context, process.env.INSTRUMENTATION_KEY!);
+    TelemetryReporter.configure(context, '66346d45-9df3-4d44-bd46-f3c9e01071ce');
+    TelemetryReporter.sendTelemetryEvent('ExtensionActivated');
     const controller = new ExtensionController(context);
     await controller.activate();
 }

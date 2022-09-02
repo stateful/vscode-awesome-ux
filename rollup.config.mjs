@@ -45,6 +45,7 @@ export default [{
             file: './out/web.js',
             format: 'cjs',
             sourcemap: true,
+            inlineDynamicImports: true
         }
     ],
     external: ['vscode'],
