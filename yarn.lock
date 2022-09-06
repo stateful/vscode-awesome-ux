@@ -5405,10 +5405,10 @@ vsce@^2.10.0:
     yauzl "^2.3.1"
     yazl "^2.2.2"
 
-vscode-telemetry@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/vscode-telemetry/-/vscode-telemetry-0.1.0.tgz#461f2c6f4286b6b4e638c03884765eb79f2e9f33"
-  integrity sha512-+iMGgqS64GnJnMEEJ0IMl5/rmL0QyQtyOcBv8Xp8ERnFsoDvwnEbUINIMxwWiKmhy+2+kdqUwsZaRPSKFBq8Rg==
+vscode-telemetry@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/vscode-telemetry/-/vscode-telemetry-0.2.0.tgz#c76eb91017764842069660219f62a128c2e91826"
+  integrity sha512-bWMbbyPuJo7lNea6GzVk5KmLmvsk1VKbVdGLlxi7PD9VEzUUUKq4vQwAfn2KyoD5UUfSupT6Q3nBBN7vQkuNnA==
   dependencies:
     "@types/vscode" "^1.70.0"
     "@types/vscode-webview" "^1.57.0"
