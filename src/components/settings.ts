@@ -25,6 +25,8 @@ const LABELS = {
     replaceTabsWithSpaces: 'Replace Tabs with Spaces'
 };
 
+const id = Math.random().toString().slice(3);
+
 @customElement('app-settings')
 export class Settings extends LitElement {
     private _client: Client<State>;
@@ -55,10 +57,25 @@ export class Settings extends LitElement {
     render() {
         return html/* html */`
             <label slot="label">Editor Settings</label>
-
-            ${Object.entries(this._state).map(([name, val]) => html/* html */`
-                <br /><vscode-checkbox id=${name} checked=${val} @change=${this._updateState}>${LABELS[name as keyof State]}</vscode-checkbox>
-            `)}
+            <br />
+            ${Object.entries(this._state).map(([name, val]) => val
+                ? (html/* html */`
+                    <vscode-checkbox
+                        id=${name}
+                        checked='true'
+                        @change=${this._updateState}
+                    >
+                        ${LABELS[name as keyof State]} ${val}
+                    </vscode-checkbox>`)
+                : (html/* html */`
+                    <vscode-checkbox
+                        id=${name}
+                        @change=${this._updateState}
+                    >
+                            ${LABELS[name as keyof State]} ${val}
+                    </vscode-checkbox>`
+                )
+            )}
         `;
     }
 
