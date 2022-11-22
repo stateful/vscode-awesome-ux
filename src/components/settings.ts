@@ -64,14 +64,14 @@ export class Settings extends LitElement {
                         checked='true'
                         @change=${this._updateState}
                     >
-                        ${LABELS[name as keyof State]} ${val}
+                        ${LABELS[name as keyof State]}
                     </vscode-checkbox>`)
                 : (html/* html */`<br />
                     <vscode-checkbox
                         id=${name}
                         @change=${this._updateState}
                     >
-                            ${LABELS[name as keyof State]} ${val}
+                            ${LABELS[name as keyof State]}
                     </vscode-checkbox>`
                 )
             )}
