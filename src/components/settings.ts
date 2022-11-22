@@ -57,9 +57,8 @@ export class Settings extends LitElement {
     render() {
         return html/* html */`
             <label slot="label">Editor Settings</label>
-            <br />
             ${Object.entries(this._state).map(([name, val]) => val
-                ? (html/* html */`
+                ? (html/* html */`<br />
                     <vscode-checkbox
                         id=${name}
                         checked='true'
@@ -67,7 +66,7 @@ export class Settings extends LitElement {
                     >
                         ${LABELS[name as keyof State]} ${val}
                     </vscode-checkbox>`)
-                : (html/* html */`
+                : (html/* html */`<br />
                     <vscode-checkbox
                         id=${name}
                         @change=${this._updateState}
