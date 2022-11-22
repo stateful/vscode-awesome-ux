@@ -170,7 +170,7 @@ import {
     CSSResult,
     LitElement,
     customElement
-} from 'lit-element';
+} from 'lit';
 
 @customElement('my-component')
 export class MyComponent extends LitElement {
