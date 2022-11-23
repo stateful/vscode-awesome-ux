@@ -119,6 +119,6 @@
     "lit": "^2.4.1",
     "rollup-plugin-multi-input": "^1.3.1",
     "rxjs": "^7.5.7",
-    "tangle": "^2.2.0-beta.0"
+    "tangle": "^3.0.0-beta.0"
   }
 }
