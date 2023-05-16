@@ -1,8 +1,5 @@
-An Awesome VSCode Extension
+An Awesome VSCode Extension [![Tests](https://github.com/stateful/vscode-awesome-ux/actions/workflows/test.yaml/badge.svg)](https://github.com/stateful/vscode-awesome-ux/actions/workflows/test.yaml) ![license](https://img.shields.io/github/license/stateful/vscode-awesome-ux.svg)
 ===========================
-
-[![Tests](https://github.com/stateful/vscode-awesome-ux/actions/workflows/test.yaml/badge.svg)](https://github.com/stateful/vscode-awesome-ux/actions/workflows/test.yaml)
-![license](https://img.shields.io/github/license/stateful/vscode-awesome-ux.svg)
 
 This extension is a best practices guide for writing great VSCode extensions. It can be used as boilerplate template to start of with a new extension.
 
