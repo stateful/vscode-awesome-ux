@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
-import nodePolyfills from 'rollup-plugin-node-polyfills'
+import nodePolyfills from 'rollup-plugin-node-polyfills';
 import eta from 'rollup-plugin-eta';
 
 const pkg = JSON.parse((await fs.readFile('package.json')).toString());
@@ -14,7 +14,7 @@ export default [{
             file: './out/webview.js',
             format: 'esm',
             sourcemap: true,
-        },
+        }
     ],
     plugins: [
         typescript({
@@ -30,7 +30,7 @@ export default [{
             dir: 'out',
             format: 'cjs',
             sourcemap: true,
-        },
+        }
     ],
     plugins: [
         typescript({ tsconfig: './tsconfig.json' }),
@@ -45,7 +45,8 @@ export default [{
             file: './out/web.js',
             format: 'cjs',
             sourcemap: true,
-        },
+            inlineDynamicImports: true
+        }
     ],
     external: ['vscode'],
     plugins: [

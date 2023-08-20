@@ -7,6 +7,7 @@ import {
 import { customElement } from 'lit/decorators.js';
 import Channel from 'tangle/webviews';
 import { Checkbox } from '@vscode/webview-ui-toolkit';
+import { TelemetryReporter } from 'vscode-telemetry/webview';
 import type { Client } from 'tangle';
 import type { Webview } from 'vscode';
 
@@ -24,6 +25,8 @@ const LABELS = {
     debuggerEnabled: 'Run with Debugger Enabled',
     replaceTabsWithSpaces: 'Replace Tabs with Spaces'
 };
+
+const reporter = TelemetryReporter.configure(vscode);
 
 @customElement('app-settings')
 export class Settings extends LitElement {
@@ -72,6 +75,7 @@ export class Settings extends LitElement {
     private _updateState (ev: CustomEvent) {
         const elem = ev.composedPath()[0] as Checkbox;
         const state = elem.id as keyof typeof this._state;
+        reporter.sendTelemetryEvent('checkboxChecked', { checked: elem.checked ? 'Yes' : 'no' });
         this._client.broadcast({
             ...this._state,
             ...{ [state]: elem.checked }

@@ -5,19 +5,22 @@ import {
     ExtensionContext
 } from 'vscode';
 import { Subject } from "rxjs";
+import { TelemetryViewProvider } from 'vscode-telemetry';
 
 import { webviewOptions } from '../constants';
 import { getHtmlForWebview } from '../utils';
 
-export default class TodoAppPanel implements WebviewViewProvider {
+export default class TodoAppPanel extends TelemetryViewProvider implements WebviewViewProvider {
     private _webview = new Subject<Webview>();
 
     constructor(
         private readonly _context: ExtensionContext,
         public readonly identifier: string
-    ) {}
+    ) {
+        super();
+    }
 
-    async resolveWebviewView(webviewView: WebviewView): Promise<void> {
+    async resolveWebviewTelemetryView(webviewView: WebviewView): Promise<void> {
         webviewView.webview.html = await getHtmlForWebview(webviewView.webview, this._context.extensionUri);
         webviewView.webview.options = {
             ...webviewOptions,

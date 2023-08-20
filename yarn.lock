@@ -146,6 +146,42 @@
   resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-1.4.0.tgz#78ed05eb9b750e8e3671a61a30c19198e4038f80"
   integrity sha512-blrtlLKvtVyjTJ3gUHWNSHOU6tD8be9mRafqtnO7GVMcB+5z4RjNcO0DpMGmccK6N8yur1vVVYnS0gPdQ/WgEQ==
 
+"@microsoft/1ds-core-js@3.2.6", "@microsoft/1ds-core-js@^3.2.3":
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/@microsoft/1ds-core-js/-/1ds-core-js-3.2.6.tgz#8a77909f89f991aa2f0b4ae8825c75042962e68e"
+  integrity sha512-6OpppYCEA+rXjcs2w0KnWji3Y6ZDx0wykY7ZL3QF68NS323C45GHSpkDpVRT/lDU6Xbau/PvQm2zTYAzLcperA==
+  dependencies:
+    "@microsoft/applicationinsights-core-js" "2.8.6"
+    "@microsoft/applicationinsights-shims" "^2.0.1"
+    "@microsoft/dynamicproto-js" "^1.1.6"
+
+"@microsoft/1ds-post-js@^3.2.3":
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/@microsoft/1ds-post-js/-/1ds-post-js-3.2.6.tgz#cdfa74acfc3205c0a5b79925284d6d166aa43901"
+  integrity sha512-Zdyl3FU6kU/a7TlVVSTBZg+hSECTT65iI99FsjMOx88HudyVyk9M/0lVbA+FVXvGaxzmtBW6Lw0qRHYp4tBMSA==
+  dependencies:
+    "@microsoft/1ds-core-js" "3.2.6"
+    "@microsoft/applicationinsights-shims" "^2.0.1"
+    "@microsoft/dynamicproto-js" "^1.1.6"
+
+"@microsoft/applicationinsights-core-js@2.8.6":
+  version "2.8.6"
+  resolved "https://registry.yarnpkg.com/@microsoft/applicationinsights-core-js/-/applicationinsights-core-js-2.8.6.tgz#4f0f9ad809aacfc96cb882139b69b3625519c51a"
+  integrity sha512-rL+ceda1Y6HaHBe1vIbNT/f5JGuHiD5Ydq+DoAfu56o13wyJu4sao3QKaabgaIM59pPO+3BMeGsK8NNUGYaT3w==
+  dependencies:
+    "@microsoft/applicationinsights-shims" "2.0.1"
+    "@microsoft/dynamicproto-js" "^1.1.6"
+
+"@microsoft/applicationinsights-shims@2.0.1", "@microsoft/applicationinsights-shims@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@microsoft/applicationinsights-shims/-/applicationinsights-shims-2.0.1.tgz#5d72fb7aaf4056c4fda54f9d7c93ccf8ca9bcbfd"
+  integrity sha512-G0MXf6R6HndRbDy9BbEj0zrLeuhwt2nsXk2zKtF0TnYo39KgYqhYC2ayIzKPTm2KAE+xzD7rgyLdZnrcRvt9WQ==
+
+"@microsoft/dynamicproto-js@^1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@microsoft/dynamicproto-js/-/dynamicproto-js-1.1.6.tgz#6fe03468862861f5f88ac4c3959a652b3797f1bc"
+  integrity sha512-D1Oivw1A4bIXhzBIy3/BBPn3p2On+kpO2NiYt9shICDK7L/w+cR6FFBUsBZ05l6iqzTeL+Jm8lAYn0g6G7DmDg==
+
 "@microsoft/fast-element@^1.10.5", "@microsoft/fast-element@^1.6.2", "@microsoft/fast-element@^1.9.0":
   version "1.10.5"
   resolved "https://registry.yarnpkg.com/@microsoft/fast-element/-/fast-element-1.10.5.tgz#0ccedb56bd1fa9d981acb33665d074abb3bf76f5"
@@ -614,6 +650,14 @@
   version "0.0.32"
   resolved "https://registry.yarnpkg.com/@vscode/codicons/-/codicons-0.0.32.tgz#9e27de90d509c69762b073719ba3bf46c3cd2530"
   integrity sha512-3lgSTWhAzzWN/EPURoY4ZDBEA80OPmnaknNujA3qnI4Iu7AONWd9xF3iE4L+4prIe8E3TUnLQ4pxoaFTEEZNwg==
+
+"@vscode/extension-telemetry@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@vscode/extension-telemetry/-/extension-telemetry-0.6.2.tgz#b86814ee680615730da94220c2b03ea9c3c14a8e"
+  integrity sha512-yb/wxLuaaCRcBAZtDCjNYSisAXz3FWsSqAha5nhHcYxx2ZPdQdWuZqVXGKq0ZpHVndBWWtK6XqtpCN2/HB4S1w==
+  dependencies:
+    "@microsoft/1ds-core-js" "^3.2.3"
+    "@microsoft/1ds-post-js" "^3.2.3"
 
 "@vscode/test-electron@^2.1.3", "@vscode/test-electron@^2.1.5":
   version "2.1.5"
@@ -5360,6 +5404,16 @@ vsce@^2.10.0:
     xml2js "^0.4.23"
     yauzl "^2.3.1"
     yazl "^2.2.2"
+
+vscode-telemetry@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/vscode-telemetry/-/vscode-telemetry-0.2.0.tgz#c76eb91017764842069660219f62a128c2e91826"
+  integrity sha512-bWMbbyPuJo7lNea6GzVk5KmLmvsk1VKbVdGLlxi7PD9VEzUUUKq4vQwAfn2KyoD5UUfSupT6Q3nBBN7vQkuNnA==
+  dependencies:
+    "@types/vscode" "^1.70.0"
+    "@types/vscode-webview" "^1.57.0"
+    "@vscode/extension-telemetry" "^0.6.2"
+    tangle "^2.1.0"
 
 vscode-uri@^3.0.3:
   version "3.0.3"

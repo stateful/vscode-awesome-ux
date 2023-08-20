@@ -18,6 +18,7 @@ yarn-error.log
 vscode.lsif
 vscode.db
 .vscode-test
+.vscode-test-web
 /.profile-oss
 test/.wdio-vscode-service
 test/screenshots

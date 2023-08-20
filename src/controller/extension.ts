@@ -2,6 +2,7 @@ import vscode from "vscode";
 import { EventEmitter } from 'events';
 
 import Channel from 'tangle/webviews';
+import { createWebviewTelemetryPanel } from 'vscode-telemetry';
 
 import TodoAppPanel from "../webview/todoApp";
 import { getHtmlForWebview } from '../utils';
@@ -32,7 +33,7 @@ export default class ExtensionController implements vscode.Disposable {
         this._examplePanel2 = new TodoAppPanel(this._context, 'panel2');
         this._disposables.push(vscode.window.registerWebviewViewProvider('panel2', this._examplePanel2));
 
-        this._webviewPanel = vscode.window.createWebviewPanel(
+        this._webviewPanel = createWebviewTelemetryPanel(
             'column-one',
             'Example WebView Panel',
             vscode.ViewColumn.One,
